@@ -284,6 +284,7 @@ if __name__ == "__main__":
 <title>THE ATOM · ATM · UD0</title>{FONTS}<style>{CSS}</style></head><body><div class="wrap">
 <header>
 <div class="eye"><a href="{GH}/ud0/">UD0</a> · a dissection · companion to <a href="{GH}/elements/">the Elements workshop</a></div>
+<div style="margin:14px 0 2px"><a href="illustration.html" style="display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--acc);border-radius:4px;padding:9px 18px;text-decoration:none;box-shadow:0 0 16px rgba(76,201,240,.3)">▦ open the live 2D illustration · 10×10 grid →</a></div>
 {hero_svg()}
 <h1>The Atom<span>everything in it · and what it does</span></h1>
 <div class="h-sub">14 parts · 4 forces · <b>two shell systems</b> · ATM</div>
