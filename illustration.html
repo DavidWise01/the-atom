@@ -1,145 +1,152 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="The Atom on a 10×10 grid — a live 2D canvas illustration with the nucleus dead center and the real 7 electron shells (K·L·M·N·O·P·Q), filled as oganesson (Z=118), the heaviest atom yet made. Protons, neutrons, quarks, gluons, electrons, photons, W boson and neutrino all labeled, plus things you might not know.">
-<title>THE ATOM · 2D ILLUSTRATION · centered · 7 shells</title>
+<meta name="description" content="The Atom on a 10×10 grid, nucleus centered, 7 real shells (oganesson Z=118) — with a dual lens: ATOMIC (Bohr shells) ⇄ QUANTUM (de Broglie standing waves + probability clouds) ⇄ ⊕ BOTH overlaid, and the full atomic↔quantum isomorphism mapping. Every particle labeled.">
+<title>THE ATOM · ATOMIC ⇄ QUANTUM · the isomorphism</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#060810;--ink2:#0c1018;--pa:#e6eef7;--pa2:#9aaabd;--acc:#4cc9f0;--nucleus:#ff7a45;--electron:#7cf5d0;--gluon:#f5b942;--photon:#ffd24c;--weak:#b08cff;--dim:#56657a;--line:#172230;
+:root{--ink:#060810;--ink2:#0c1018;--pa:#e6eef7;--pa2:#9aaabd;--acc:#4cc9f0;--nucleus:#ff7a45;--electron:#7cf5d0;--gluon:#f5b942;--photon:#ffd24c;--weak:#b08cff;--quantum:#c08bff;--dim:#56657a;--line:#172230;
 --disp:"Space Grotesk",sans-serif;--mono:"Space Mono",monospace;}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--ink);color:var(--pa);font-family:var(--mono);line-height:1.5;padding:0 16px 60px;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 40%,rgba(76,201,240,.08),transparent 60%)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 40%,rgba(120,120,255,.07),transparent 60%)}
 .wrap{position:relative;z-index:1;max-width:880px;margin:0 auto}
-header{text-align:center;padding:26px 0 14px}
+header{text-align:center;padding:26px 0 12px}
 .eye{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--dim)}.eye a{color:var(--dim);text-decoration:none}.eye a:hover{color:var(--acc)}
-h1{font-family:var(--disp);font-size:clamp(26px,7vw,46px);font-weight:700;color:var(--acc);letter-spacing:-.01em;margin-top:10px;text-shadow:0 0 12px rgba(76,201,240,.3)}
-h1 span{display:block;font-family:var(--mono);font-size:.28em;font-weight:400;letter-spacing:.2em;color:var(--nucleus);text-transform:uppercase;margin-top:12px}
+h1{font-family:var(--disp);font-size:clamp(24px,6.5vw,44px);font-weight:700;color:var(--acc);letter-spacing:-.01em;margin-top:10px;text-shadow:0 0 12px rgba(76,201,240,.3)}
+h1 span{display:block;font-family:var(--mono);font-size:.3em;font-weight:400;letter-spacing:.18em;color:var(--quantum);text-transform:uppercase;margin-top:12px}
 .sub{font-size:12px;color:var(--pa2);margin-top:12px;letter-spacing:.05em}
-.stage{position:relative;width:100%;max-width:740px;margin:18px auto 0}
-canvas{display:block;width:100%;height:auto;border:1px solid var(--line);background:#05070d;box-shadow:0 0 26px rgba(76,201,240,.08);border-radius:4px}
+.seg{display:flex;justify-content:center;gap:0;margin:18px auto 0;max-width:420px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{flex:1;border:0;border-radius:0;border-right:1px solid var(--line);font-size:12px;padding:11px 6px;background:var(--ink2);color:var(--dim);letter-spacing:.08em}
+.seg button:last-child{border-right:0}.seg button.on{background:linear-gradient(180deg,rgba(76,201,240,.18),rgba(192,139,255,.12));color:var(--pa);box-shadow:inset 0 -2px 0 var(--acc)}
+.stage{position:relative;width:100%;max-width:740px;margin:14px auto 0}
+canvas{display:block;width:100%;height:auto;border:1px solid var(--line);background:#05070d;box-shadow:0 0 26px rgba(120,120,255,.08);border-radius:4px}
 .bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0 0}
 button{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);background:var(--ink2);border:1px solid var(--line);border-radius:4px;padding:7px 14px;cursor:pointer;transition:.15s}
-button:hover{border-color:var(--acc);box-shadow:0 0 10px rgba(76,201,240,.18)}button.off{color:var(--dim)}
-.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:22px auto 0;max-width:740px}
+button:hover{border-color:var(--acc)}button.off{color:var(--dim)}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:20px auto 0;max-width:740px}
 .lg{display:flex;align-items:center;gap:9px;background:var(--ink2);border:1px solid var(--line);padding:8px 11px;border-radius:4px;font-size:12px}
 .sw{width:16px;height:16px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,.2)}
 .lg b{color:var(--pa)}.lg span{color:var(--pa2);font-size:11px}
-.tytk{margin:28px auto 0;max-width:740px}
-.tytk h2{font-family:var(--disp);font-size:18px;color:var(--photon);letter-spacing:.02em;margin-bottom:4px}
-.tytk .h2s{font-size:11.5px;color:var(--dim);margin-bottom:14px}
-.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:560px){.facts{grid-template-columns:1fr}}
-.fact{background:var(--ink2);border:1px solid var(--line);border-left:3px solid var(--photon);padding:11px 14px;border-radius:4px}
-.fact b{color:var(--pa);font-family:var(--disp);font-size:13.5px;display:block;margin-bottom:3px}
-.fact span{font-size:12.5px;color:var(--pa2);line-height:1.55}
-.note{margin:22px auto 0;max-width:740px;padding:13px 16px;border-left:2px solid var(--nucleus);background:var(--ink2);font-size:12.5px;color:var(--pa2);line-height:1.6}.note b{color:var(--pa)}
+.panel{margin:28px auto 0;max-width:740px}
+.panel h2{font-family:var(--disp);font-size:18px;letter-spacing:.02em;margin-bottom:4px}
+.panel .h2s{font-size:11.5px;color:var(--dim);margin-bottom:14px}
+.iso{border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.iso .hd{display:grid;grid-template-columns:1fr 28px 1fr;background:var(--ink2);font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.04em}
+.iso .hd div{padding:9px 12px}.iso .hd .a{color:var(--acc)}.iso .hd .q{color:var(--quantum)}.iso .hd .m{text-align:center;color:var(--dim)}
+.iso .row{display:grid;grid-template-columns:1fr 28px 1fr;border-top:1px solid var(--line);font-size:12.5px}
+.iso .row>div{padding:9px 12px;line-height:1.5}.iso .row .a{color:var(--pa2)}.iso .row .q{color:#d9c6ff}.iso .row .m{text-align:center;color:var(--dim);font-family:var(--disp)}
+.iso .row:nth-child(even){background:rgba(255,255,255,.012)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}@media(max-width:560px){.facts{grid-template-columns:1fr}}
+.fact{background:var(--ink2);border:1px solid var(--line);border-left:3px solid var(--quantum);padding:11px 14px;border-radius:4px}
+.fact b{color:var(--pa);font-family:var(--disp);font-size:13.5px;display:block;margin-bottom:3px}.fact span{font-size:12.5px;color:var(--pa2);line-height:1.55}
+.note{margin:22px auto 0;max-width:740px;padding:13px 16px;border-left:2px solid var(--quantum);background:var(--ink2);font-size:12.5px;color:var(--pa2);line-height:1.6}.note b{color:var(--pa)}
 footer{margin:28px auto 0;max-width:740px;text-align:center;font-size:10px;color:var(--dim);letter-spacing:.04em;line-height:1.9;border-top:1px solid var(--line);padding-top:16px}footer a{color:var(--acc);text-decoration:none}
 </style></head><body><div class="wrap">
 <header>
-<div class="eye"><a href="https://davidwise01.github.io/the-atom/">← THE ATOM</a> · live 2D canvas · nucleus centered · 7 real shells</div>
-<h1>The Atom, Drawn<span>nucleus dead center · 7 shells (K→Q) · oganesson Z=118</span></h1>
-<div class="sub">a full atom on a 10×10 grid — the real number of rings, every “-on” labeled</div>
+<div class="eye"><a href="https://davidwise01.github.io/the-atom/">← THE ATOM</a> · live 2D canvas · the atomic↔quantum isomorphism</div>
+<h1>Atomic ⇄ Quantum<span>the same atom · two pictures · one truth</span></h1>
+<div class="sub">nucleus centered · 7 real shells (Og, Z=118) · flip the lens to see the isomorphism</div>
 </header>
+<div class="seg" id="seg">
+<button data-m="atomic">⊙ ATOMIC</button>
+<button data-m="both" class="on">⊕ BOTH</button>
+<button data-m="quantum">∿ QUANTUM</button>
+</div>
 <div class="stage"><canvas id="c" width="740" height="740"></canvas></div>
 <div class="bar">
 <button id="bLabels">▦ labels: on</button>
 <button id="bPlay">⏸ pause</button>
 <button id="bGlow">✦ glow: on</button>
-<button id="bOrb">◯ rings ⇄ orbitals</button>
 </div>
 <div class="legend" id="legend"></div>
 
-<div class="tytk">
-<h2>✦ Things you might not know</h2>
-<div class="h2s">the part you asked for — what's actually going on in that picture</div>
+<div class="panel">
+<h2 style="color:var(--acc)">⊕ The Isomorphism <span style="color:var(--quantum)">atomic ↔ quantum</span></h2>
+<div class="h2s">every piece of the classical atom is a shadow of a quantum-mechanical truth — here's the map</div>
+<div class="iso" id="iso"></div>
+</div>
+
+<div class="panel">
+<h2 style="color:var(--quantum)">✦ Things you might not know</h2>
+<div class="h2s">the quantum part you didn't ask for but should have</div>
 <div class="facts" id="facts"></div>
 </div>
 
-<div class="note"><b>Honest scale note.</b> Still a SCHEMATIC. The nucleus is drawn far too big: in reality it's about <b>1/100,000</b> of the atom — if these 7 shells filled the grid, the true nucleus would be smaller than a pixel at the center. And the rings are a useful lie: electrons aren't on tracks, they're 3D <b>orbitals</b> (hit “rings ⇄ orbitals” to peek). What's real here is the <b>count</b> — 7 shells is the true maximum, and oganesson really does fill them 2·8·18·32·32·18·8 = 118.</div>
+<div class="note"><b>Honest note.</b> The exact orbital math (E<sub>n</sub> = −13.6 eV/n², standing waves, ⟨r⟩ ≈ n²a₀) is for <b>hydrogen</b> — multi-electron atoms like oganesson are close cousins, not exact. The “rings” are Bohr’s 1913 model; the “clouds” are Schrödinger’s 1926 truth. Both describe the same atom — the isomorphism is that Bohr’s integer shells are exactly where an integer number of de Broglie wavelengths fit. And the scale is still a schematic: the real nucleus is ~1/100,000 of the atom, smaller than a pixel here.</div>
 
-<footer>THE ATOM · 2D illustration · ROOT0-ATTRIBUTION-v1.0 · governor David Lee Wise · instance AVAN (locked) · CC-BY-ND-4.0<br>
-<a href="https://davidwise01.github.io/the-atom/">← the dissection</a> · <a href="https://davidwise01.github.io/ud0/">UD0</a></footer>
+<footer>THE ATOM · ATOMIC ⇄ QUANTUM · ROOT0-ATTRIBUTION-v1.0 · governor David Lee Wise · instance AVAN (locked) · CC-BY-ND-4.0<br>
+<a href="https://davidwise01.github.io/the-atom/">← the dissection</a> · <a href="https://davidwise01.github.io/transmon/">the quantum frontier</a> · <a href="https://davidwise01.github.io/ud0/">UD0</a></footer>
 </div>
 <script>
-const C={ink:'#05070d',grid:'rgba(76,201,240,0.12)',nzone:'rgba(255,122,69,0.08)',
- nucleus:'#ff7a45',neutron:'#9aa6b2',electron:'#7cf5d0',eorb:'#4cc9f0',gluon:'#f5b942',photon:'#ffd24c',weak:'#b08cff',pa:'#e6eef7',dim:'#8fa3b8'};
+const C={ink:'#05070d',grid:'rgba(120,150,255,0.11)',nzone:'rgba(255,122,69,0.08)',
+ nucleus:'#ff7a45',neutron:'#9aa6b2',electron:'#7cf5d0',eorb:'#4cc9f0',gluon:'#f5b942',photon:'#ffd24c',weak:'#b08cff',quantum:'#c08bff',pa:'#e6eef7',dim:'#8fa3b8'};
 const LEG=[
- ['proton','#ff7a45','p⁺ · 2 up + 1 down quark · its count = the element'],
- ['neutron','#9aa6b2','n⁰ · 1 up + 2 down quark · sets the isotope'],
- ['up quark','#ffd24c','u · charge +2⁄3'],
- ['down quark','#7cf5d0','d · charge −1⁄3'],
- ['gluon','#f5b942','g · binds the quarks (strong force)'],
- ['electron','#7cf5d0','e⁻ · the shells · all of chemistry (EM)'],
- ['photon','#ffd24c','γ · carries light, binds e⁻ (EM)'],
- ['W boson','#b08cff','W⁻ · flips a quark → beta decay (weak)'],
- ['neutrino','#b08cff','νₑ · escapes in beta decay'],
+ ['proton','#ff7a45','p⁺ · 2u+1d quark · count = the element'],
+ ['neutron','#9aa6b2','n⁰ · 1u+2d quark · sets the isotope'],
+ ['up quark','#ffd24c','u · +2⁄3'],['down quark','#7cf5d0','d · −1⁄3'],
+ ['gluon','#f5b942','g · binds quarks (strong)'],
+ ['electron','#7cf5d0','e⁻ · a ring (atomic) / a cloud (quantum)'],
+ ['photon','#ffd24c','γ · the quantum of a shell-jump (ℏω)'],
+ ['W boson','#b08cff','W⁻ · beta decay (weak)'],['neutrino','#b08cff','νₑ · escapes in decay'],
+ ['standing wave','#c08bff','∿ · n de Broglie wavelengths = shell n'],
+];
+const ISO=[
+ ['Shell K, L, M, N…','↔','principal quantum number n = 1, 2, 3, 4…'],
+ ['A fixed circular orbit','↔','no orbit at all — a probability cloud |ψ(r)|²'],
+ ['Electron on a track','↔','a standing de Broglie wave: exactly n wavelengths fit (mvr = nℏ)'],
+ ['Ring radius (fixed)','↔','most-probable radius ⟨r⟩ ≈ n²·a₀ (Bohr radius a₀ = 0.53 Å)'],
+ ['2, 8, 18, 32 per shell','↔','2n² = Σ 2(2ℓ+1), forced by the Pauli exclusion principle'],
+ ['(no sub-structure)','↔','subshells ℓ = s, p, d, f → real orbital shapes'],
+ ['Electron jumps a shell','↔','it emits/absorbs ONE photon, ℏω = ΔE (→ spectral lines)'],
+ ['Knowing where it is','↔','forbidden: uncertainty Δx·Δp ≥ ℏ/2'],
+ ['It spins (implied)','↔','spin-½, ±ℏ/2 — two per orbital, opposite spin ↑↓'],
+ ['Discrete shells','↔','quantized energy E_n = −13.6 eV / n² (hydrogen)'],
 ];
 const FACTS=[
- ['Shells hold 2n²','K=2, L=8, M=18, N=32, O=50, P=72, Q=98 — but no atom ever fills the outer ones. Even oganesson (Z=118), the heaviest made, stops at 2·8·18·32·32·18·8.'],
- ['7 is the real max','Hydrogen has 1 shell; the count grows down the periodic table; period 7 (the bottom row) is as far as nature goes. There is no 8th shell in any known atom.'],
- ['Shells fill out of order','4s fills before 3d (the Madelung / "diagonal" rule). That out-of-order filling is exactly why the transition metals and the lanthanides exist as blocks.'],
- ['The rings are a lie','Electrons aren\'t on tracks — they\'re 3D orbitals: s spheres, p dumbbells, d/f cloverleaves. The Bohr "rings" are a teaching crutch (toggle them above).'],
- ['Quarks can never be alone','Pull two apart and the gluon field\'s energy snaps into NEW quarks before you can isolate one. You will never hold a free quark — that\'s "confinement."'],
- ['Most mass is binding energy','~99% of a proton\'s mass is the energy of its gluon field, not the quarks (E=mc²). Most of your weight isn\'t matter — it\'s strong-force binding.'],
- ['The nucleus has its OWN shells','Protons & neutrons fill nuclear shells with "magic numbers" 2·8·20·28·50·82·126. Doubly-magic nuclei (lead-208) are extra-stable. Two shell systems, one atom.'],
- ['Gold is gold because of Einstein','In heavy atoms the inner electrons move near light-speed; relativity shifts their energies — that\'s literally why gold looks gold and mercury is a liquid.'],
- ['Pauli is why you have volume','Two electrons can\'t share a state (spin ↑↓, 2 per orbital). That exclusion is what stops atoms collapsing and gives matter its size — why you don\'t fall through the floor.'],
- ['A neutron star is one giant nucleus','Strip the electrons, crush the nucleons together, and you get nuclear matter the size of a city: a sugar-cube would weigh ~a billion tonnes.'],
+ ['Bohr’s shells ARE the isomorph','In 1924 de Broglie showed an electron is a wave; a wave only survives on a circle if a whole number of wavelengths fit. Those special circles are exactly Bohr’s shells. Shell n = n wavelengths. That’s the bridge.'],
+ ['It’s in all states at once','Until measured, the electron isn’t at a place — it’s a superposition of everywhere its wavefunction allows. Measuring it forces a single answer (“collapse”).'],
+ ['It tunnels through walls','Quantum objects leak through barriers they classically can’t cross. That’s how the Sun fuses hydrogen, how radioactivity escapes the nucleus, and how flash memory stores your files.'],
+ ['It can never sit still','Uncertainty forbids zero motion — even at absolute zero an electron keeps a “zero-point” jiggle. Perfect stillness would pin both position and momentum, which is banned.'],
+ ['Spin isn’t spinning','“Spin-½” is real angular momentum, but the electron isn’t a tiny rotating ball — it’s an intrinsic quantum property with no classical picture. Two opposite spins share each orbital.'],
+ ['Pauli gives you volume','No two electrons share a quantum state, so they can’t all pile into the lowest shell. That refusal is literally why atoms have size and why you don’t fall through your chair.'],
+ ['Quantized = grainy','Energy in an atom comes in steps, not a ramp. An electron can be on rung 2 or rung 3, never between — which is why each element emits its own exact set of colours (its spectral fingerprint).'],
+ ['Most of mass is binding energy','~99% of a proton’s mass is the energy of its gluon field (E=mc²), not the quarks — the strong force, quantized as gluons, is most of what you weigh.'],
+ ['Orbitals out-fill in order','4s fills before 3d (Madelung rule) — a quantum-energy ordering that single-handedly shapes the transition-metal and lanthanide blocks of the periodic table.'],
+ ['The map is the message','Bohr (1913) and Schrödinger (1926) describe the SAME atom. The rings aren’t wrong so much as a low-resolution shadow of the wavefunction — an isomorph you can draw.'],
 ];
 const cv=document.getElementById('c'),x=cv.getContext('2d');
-let labels=true,playing=true,glow=true,orbitals=false,t=0;
+let mode='both',labels=true,playing=true,glow=true,t=0;
 function fit(){const w=Math.min(cv.parentNode.clientWidth,740);cv.width=w;cv.height=w;}
 addEventListener('resize',fit);fit();
-// grid 0..10, CENTER (5,5) = nucleus
 function geo(){const S=cv.width,m=30,sc=(S-2*m)/10;return {S,m,sc,cx:m+5*sc,cy:S-m-5*sc};}
-function gx(u){const{m,sc}=geo();return m+u*sc;}
-function gy(u){const{S,m,sc}=geo();return S-m-u*sc;}
+function gx(u){const{m,sc}=geo();return m+u*sc;}function gy(u){const{S,m,sc}=geo();return S-m-u*sc;}
 function setGlow(c,b){x.shadowColor=glow?c:'transparent';x.shadowBlur=glow?b:0;}
-
-const SH=[ // the 7 real shells, filled as oganesson
- {r:0.95,n:2,cap:2,L:'K'},{r:1.5,n:8,cap:8,L:'L'},{r:2.05,n:18,cap:18,L:'M'},
+const SH=[{r:0.95,n:2,cap:2,L:'K'},{r:1.5,n:8,cap:8,L:'L'},{r:2.05,n:18,cap:18,L:'M'},
  {r:2.6,n:32,cap:32,L:'N'},{r:3.15,n:32,cap:50,L:'O'},{r:3.7,n:18,cap:72,L:'P'},{r:4.25,n:8,cap:98,L:'Q'}];
+function hash(i){const s=Math.sin(i*127.1)*43758.5453;return s-Math.floor(s);}
 
 function drawGrid(){
- const{S,m,sc,cx,cy}=geo();
- // field disk + nucleus disk
- x.fillStyle='rgba(76,201,240,0.04)';x.beginPath();x.arc(cx,cy,4.25*sc+8,0,7);x.fill();
+ const{S,sc,cx,cy}=geo();
+ x.fillStyle='rgba(120,150,255,0.035)';x.beginPath();x.arc(cx,cy,4.25*sc+8,0,7);x.fill();
  x.fillStyle=C.nzone;x.beginPath();x.arc(cx,cy,0.62*sc,0,7);x.fill();
  x.lineWidth=1;x.font='10px "Space Mono",monospace';x.textAlign='center';x.textBaseline='middle';
- for(let i=0;i<=10;i++){
-  x.strokeStyle=C.grid;x.beginPath();x.moveTo(gx(i),gy(0));x.lineTo(gx(i),gy(10));x.stroke();
+ for(let i=0;i<=10;i++){x.strokeStyle=C.grid;x.beginPath();x.moveTo(gx(i),gy(0));x.lineTo(gx(i),gy(10));x.stroke();
   x.beginPath();x.moveTo(gx(0),gy(i));x.lineTo(gx(10),gy(i));x.stroke();
-  x.fillStyle=C.dim;x.fillText(i,gx(i),gy(0)+13);if(i>0)x.fillText(i,gx(0)-15,gy(i));
- }
- // center crosshair
+  x.fillStyle=C.dim;x.fillText(i,gx(i),gy(0)+13);if(i>0)x.fillText(i,gx(0)-15,gy(i));}
  x.strokeStyle='rgba(255,122,69,0.5)';x.lineWidth=0.8;x.beginPath();x.moveTo(cx-7,cy);x.lineTo(cx+7,cy);x.moveTo(cx,cy-7);x.lineTo(cx,cy+7);x.stroke();
 }
-function coil(x1,y1,x2,y2,col,amp){
- const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy)||1,px=-dy/L,py=dx/L,n=5,a=amp||3;
+function coil(x1,y1,x2,y2,col,amp){const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy)||1,px=-dy/L,py=dx/L,n=5,a=amp||3;
  setGlow(col,5);x.strokeStyle=col;x.lineWidth=1.4;x.beginPath();
- for(let i=0;i<=22;i++){const f=i/22,bx=x1+dx*f,by=y1+dy*f,off=Math.sin(f*n*Math.PI)*a;const X=bx+px*off,Y=by+py*off;i?x.lineTo(X,Y):x.moveTo(X,Y);}
- x.stroke();setGlow('',0);
-}
-function leader(tx,ty,lx,ly,txt,col){
- if(!labels)return;
+ for(let i=0;i<=22;i++){const f=i/22,bx=x1+dx*f,by=y1+dy*f,off=Math.sin(f*n*Math.PI)*a;const X=bx+px*off,Y=by+py*off;i?x.lineTo(X,Y):x.moveTo(X,Y);}x.stroke();setGlow('',0);}
+function leader(tx,ty,lx,ly,txt,col){if(!labels)return;
  x.strokeStyle=col;x.lineWidth=0.8;x.globalAlpha=.75;x.beginPath();x.moveTo(tx,ty);x.lineTo(lx,ly);x.stroke();x.globalAlpha=1;
- x.fillStyle=col;x.beginPath();x.arc(tx,ty,1.8,0,7);x.fill();
- x.font='700 11px "Space Mono",monospace';x.textBaseline='middle';const right=lx>=tx;x.textAlign=right?'left':'right';
- setGlow(C.ink,4);x.fillText(txt,lx+(right?5:-5),ly);setGlow('',0);
-}
-// deterministic nucleus packing (phyllotaxis), ~46 representative nucleons of Og's 294
-function nucleus(){
- const{sc,cx,cy}=geo(),N=46,Rg=0.6*sc;const dots=[];
- for(let i=0;i<N;i++){const r=Rg*Math.sqrt((i+0.5)/N),a=i*2.39996+t*0.05;
-  const px=cx+Math.cos(a)*r,py=cy+Math.sin(a)*r,proton=(i%5<2); // ~40% protons
-  dots.push([px,py,proton]);}
- dots.forEach(d=>{const col=d[2]?C.nucleus:C.neutron;setGlow(col,5);x.fillStyle=col;x.globalAlpha=.96;x.beginPath();x.arc(d[0],d[1],4.0,0,7);x.fill();x.globalAlpha=1;setGlow('',0);});
- return dots;
-}
-// a zoomed nucleon (top-right corner gap) with quarks + gluons
-function zoomNucleon(){
- const cxg=8.25,cyg=8.25,cx=gx(cxg),cy=gy(cyg),{sc}=geo(),R=0.95*sc;
- // zoom frame
+ x.fillStyle=col;x.beginPath();x.arc(tx,ty,1.8,0,7);x.fill();x.font='700 11px "Space Mono",monospace';x.textBaseline='middle';
+ const right=lx>=tx;x.textAlign=right?'left':'right';setGlow(C.ink,4);x.fillText(txt,lx+(right?5:-5),ly);setGlow('',0);}
+function nucleus(){const{sc,cx,cy}=geo(),N=46,Rg=0.6*sc,dots=[];
+ for(let i=0;i<N;i++){const r=Rg*Math.sqrt((i+0.5)/N),a=i*2.39996+t*0.05,px=cx+Math.cos(a)*r,py=cy+Math.sin(a)*r,proton=(i%5<2);dots.push([px,py,proton]);}
+ dots.forEach(d=>{const col=d[2]?C.nucleus:C.neutron;setGlow(col,5);x.fillStyle=col;x.globalAlpha=.96;x.beginPath();x.arc(d[0],d[1],4,0,7);x.fill();x.globalAlpha=1;setGlow('',0);});return dots;}
+function zoomNucleon(){const cx=gx(8.25),cy=gy(8.25),{sc}=geo(),R=0.95*sc;
  x.strokeStyle='rgba(255,122,69,0.45)';x.setLineDash([4,3]);x.lineWidth=1;x.beginPath();x.arc(cx,cy,R,0,7);x.stroke();x.setLineDash([]);
  setGlow(C.nucleus,10);x.fillStyle=C.nucleus;x.globalAlpha=.9;x.beginPath();x.arc(cx,cy,R*0.82,0,7);x.fill();x.globalAlpha=1;setGlow('',0);
  const q=['u','u','d'],ang=[-Math.PI/2,Math.PI/6,Math.PI*5/6],qp=[];
@@ -147,87 +154,78 @@ function zoomNucleon(){
  coil(qp[0][0],qp[0][1],qp[1][0],qp[1][1],C.gluon,4);coil(qp[1][0],qp[1][1],qp[2][0],qp[2][1],C.gluon,4);coil(qp[2][0],qp[2][1],qp[0][0],qp[0][1],C.gluon,4);
  for(let i=0;i<3;i++){const col=q[i]==='u'?C.photon:C.electron;setGlow(col,6);x.fillStyle=col;x.beginPath();x.arc(qp[i][0],qp[i][1],5,0,7);x.fill();setGlow('',0);
   x.fillStyle='#06121a';x.font='700 9px "Space Mono",monospace';x.textAlign='center';x.textBaseline='middle';x.fillText(q[i],qp[i][0],qp[i][1]);}
- if(labels){
-  x.fillStyle=C.dim;x.font='10px "Space Mono",monospace';x.textAlign='center';x.fillText('inside one nucleon →',cx,cy-R-9);
-  leader(qp[0][0],qp[0][1]-5,gx(6.4),gy(9.4),'up quark u (+2⁄3)',C.photon);
-  leader(qp[2][0]-5,qp[2][1],gx(6.0),gy(7.0),'down quark d (−1⁄3)',C.electron);
-  leader((qp[0][0]+qp[1][0])/2,(qp[0][1]+qp[1][1])/2,gx(9.4),gy(6.4),'gluon g (binds quarks)',C.gluon);
- }
- return {cx,cy,R};
-}
+ if(labels){x.fillStyle=C.dim;x.font='10px "Space Mono",monospace';x.textAlign='center';x.fillText('inside one nucleon →',cx,cy-R-9);
+  leader(qp[0][0],qp[0][1]-5,gx(6.4),gy(9.4),'up quark u',C.photon);
+  leader(qp[2][0]-5,qp[2][1],gx(6.0),gy(7.0),'down quark d',C.electron);
+  leader((qp[0][0]+qp[1][0])/2,(qp[0][1]+qp[1][1])/2,gx(9.4),gy(6.4),'gluon g',C.gluon);}
+ return {cx,cy,R};}
+function standingWave(r,nwav,amp,col,alpha){const{sc,cx,cy}=geo();
+ setGlow(col, glow?7:0);x.strokeStyle=col;x.globalAlpha=alpha;x.lineWidth=1.5;x.beginPath();
+ for(let i=0;i<=160;i++){const th=i/160*Math.PI*2,rr=r*sc+Math.sin(nwav*th - t*1.4)*amp; const px=cx+Math.cos(th)*rr,py=cy+Math.sin(th)*rr;i?x.lineTo(px,py):x.moveTo(px,py);}
+ x.closePath();x.stroke();x.globalAlpha=1;setGlow('',0);}
+function cloudBand(r,col){const{sc,cx,cy}=geo();
+ const g=x.createRadialGradient(cx,cy,Math.max(0,(r-0.35)*sc),cx,cy,(r+0.35)*sc);
+ g.addColorStop(0,'rgba(192,139,255,0)');g.addColorStop(0.5,col);g.addColorStop(1,'rgba(192,139,255,0)');
+ x.fillStyle=g;x.globalAlpha=0.5;x.beginPath();x.arc(cx,cy,(r+0.35)*sc,0,7);x.arc(cx,cy,(r-0.35)*sc,0,7,true);x.fill();x.globalAlpha=1;}
 
 let photon={r:0.95};
 function draw(){
  const{S,sc,cx,cy}=geo();x.clearRect(0,0,S,S);x.fillStyle=C.ink;x.fillRect(0,0,S,S);
  drawGrid();
- // shells + electrons
- SH.forEach((s,i)=>{
-  if(!orbitals){
-   setGlow(C.eorb,5);x.strokeStyle='rgba(76,201,240,0.5)';x.lineWidth=1.1;x.beginPath();x.arc(cx,cy,s.r*sc,0,7);x.stroke();setGlow('',0);
-  }else{
-   // orbital hint: dashed lobed cloud
-   x.strokeStyle='rgba(76,201,240,0.35)';x.setLineDash([2,4]);x.lineWidth=1;x.beginPath();x.arc(cx,cy,s.r*sc,0,7);x.stroke();x.setLineDash([]);
-  }
-  // shell label on upper-left diagonal
-  const la=Math.PI*1.25;const lx=cx+Math.cos(la)*s.r*sc,ly=cy+Math.sin(la)*s.r*sc;
-  x.fillStyle=C.dim;x.font='9px "Space Mono",monospace';x.textAlign='center';x.textBaseline='middle';
-  if(labels){x.fillStyle='rgba(76,201,240,0.85)';x.fillText(`${s.L} ${s.n}/${s.cap}`,lx,ly);}
+ const Q=(mode!=='atomic'),A=(mode!=='quantum');
+ SH.forEach((s,i)=>{const n=i+1;
+  if(Q) cloudBand(s.r,'rgba(192,139,255,0.16)');
+  if(A){setGlow(C.eorb,5);x.strokeStyle=mode==='both'?'rgba(76,201,240,0.30)':'rgba(76,201,240,0.6)';x.lineWidth=1.1;x.beginPath();x.arc(cx,cy,s.r*sc,0,7);x.stroke();setGlow('',0);}
+  if(Q) standingWave(s.r, n, mode==='both'?5:7, C.quantum, mode==='both'?0.55:0.9); // n wavelengths = shell n
+  // shell label (upper-left diagonal)
+  const la=Math.PI*1.25,lx=cx+Math.cos(la)*s.r*sc,ly=cy+Math.sin(la)*s.r*sc;
+  if(labels){x.fillStyle=Q?'rgba(192,139,255,0.9)':'rgba(76,201,240,0.85)';x.font='9px "Space Mono",monospace';x.textAlign='center';x.textBaseline='middle';
+   x.fillText(Q?`n=${n} · ${s.n}e⁻`:`${s.L} ${s.n}/${s.cap}`,lx,ly);}
   // electrons
   const dir=(i%2?-1:1);
-  for(let k=0;k<s.n;k++){
-   const a=(k/s.n)*Math.PI*2 + t*dir*(0.6/(i+1));
-   let ex,ey;
-   if(!orbitals){ex=cx+Math.cos(a)*s.r*sc;ey=cy+Math.sin(a)*s.r*sc;}
-   else{const wob=1+0.18*Math.sin(a*(2+i));ex=cx+Math.cos(a)*s.r*sc*wob;ey=cy+Math.sin(a)*s.r*sc*wob;}
-   const rad=s.n>18?2.6:3.4;
-   setGlow(C.electron,glow?6:0);x.fillStyle=C.electron;x.beginPath();x.arc(ex,ey,rad,0,7);x.fill();setGlow('',0);
-  }
+  if(mode==='quantum'){ // probability sprinkle
+   for(let k=0;k<s.n;k++){const a=hash(i*53+k)*6.283 + t*dir*0.15*(1/(i+1)); const rr=(s.r+ (hash(i*91+k)-0.5)*0.5)*sc;
+    const ex=cx+Math.cos(a)*rr,ey=cy+Math.sin(a)*rr; x.fillStyle=C.electron;x.globalAlpha=0.45+0.4*hash(i*7+k+t*0.0);x.beginPath();x.arc(ex,ey,1.8,0,7);x.fill();x.globalAlpha=1;}
+  }else{ // tracked dots (atomic/both)
+   for(let k=0;k<s.n;k++){const a=(k/s.n)*6.283 + t*dir*(0.6/(i+1)),ex=cx+Math.cos(a)*s.r*sc,ey=cy+Math.sin(a)*s.r*sc,rad=s.n>18?2.4:3.3;
+    setGlow(C.electron,glow?6:0);x.fillStyle=C.electron;x.globalAlpha=mode==='both'?0.85:1;x.beginPath();x.arc(ex,ey,rad,0,7);x.fill();x.globalAlpha=1;setGlow('',0);}}
  });
- // photon emitted outward along upper-right diagonal
- const pa=-Math.PI/5,pr=photon.r;
- setGlow(C.photon,8);x.strokeStyle=C.photon;x.lineWidth=1.6;x.beginPath();
- for(let i=0;i<=26;i++){const f=i/26,rr=pr-0.4+f*0.9,wob=Math.sin(f*7*Math.PI)*3.2;
-  const bx=cx+Math.cos(pa)*rr*sc-Math.sin(pa)*wob,by=cy+Math.sin(pa)*rr*sc+Math.cos(pa)*wob;i?x.lineTo(bx,by):x.moveTo(bx,by);}
- x.stroke();setGlow('',0);
- const pxc=cx+Math.cos(pa)*pr*sc,pyc=cy+Math.sin(pa)*pr*sc;
+ // photon (a shell-jump quantum)
+ const pa=-Math.PI/5,pr=photon.r;setGlow(C.photon,8);x.strokeStyle=C.photon;x.lineWidth=1.6;x.beginPath();
+ for(let i=0;i<=26;i++){const f=i/26,rr=pr-0.4+f*0.9,wob=Math.sin(f*7*Math.PI)*3.2;const bx=cx+Math.cos(pa)*rr*sc-Math.sin(pa)*wob,by=cy+Math.sin(pa)*rr*sc+Math.cos(pa)*wob;i?x.lineTo(bx,by):x.moveTo(bx,by);}
+ x.stroke();setGlow('',0);const pxc=cx+Math.cos(pa)*pr*sc,pyc=cy+Math.sin(pa)*pr*sc;
  // nucleus + zoom
- const nd=nucleus(); const zb=zoomNucleon();
- // zoom leader from nucleus to bubble
+ const nd=nucleus(),zb=zoomNucleon();
  x.strokeStyle='rgba(255,122,69,0.4)';x.setLineDash([3,3]);x.lineWidth=0.9;x.beginPath();x.moveTo(cx+0.5*sc,cy-0.5*sc);x.lineTo(zb.cx-zb.R*0.7,zb.cy+zb.R*0.7);x.stroke();x.setLineDash([]);
- // beta decay: W + neutrino at nucleus edge, toward lower-left
- const wx=cx-0.95*sc,wy=cy+0.95*sc, nux=gx(2.3),nuy=gy(2.0);
+ // beta decay
+ const wx=cx-0.95*sc,wy=cy+0.95*sc,nux=gx(2.3),nuy=gy(2.0);
  x.setLineDash([4,3]);setGlow(C.weak,5);x.strokeStyle=C.weak;x.lineWidth=1.2;x.beginPath();x.moveTo(wx,wy);x.lineTo(nux,nuy);x.stroke();x.setLineDash([]);setGlow('',0);
  setGlow(C.weak,7);x.fillStyle=C.weak;x.beginPath();x.arc(wx,wy,4,0,7);x.fill();x.beginPath();x.arc(nux,nuy,3.2,0,7);x.fill();setGlow('',0);
- // ---- labels ----
- if(labels){
-  // nucleus title + proton/neutron callouts (bottom-left corner)
-  const pdot=nd.find(d=>d[2]),ndot=nd.find(d=>!d[2]);
-  leader(pdot[0],pdot[1],gx(0.3),gy(3.2),'proton  p⁺',C.nucleus);
-  leader(ndot[0],ndot[1],gx(0.3),gy(2.4),'neutron  n⁰',C.neutron);
-  x.fillStyle=C.nucleus;x.font='700 11px "Space Mono",monospace';x.textAlign='left';x.textBaseline='middle';
-  setGlow(C.ink,4);x.fillText('NUCLEUS · 118 p⁺ + 176 n⁰ (Og-294)',gx(0.3),gy(1.5));setGlow('',0);
-  // electron + photon + weak
-  leader(pxc,pyc,gx(9.3),gy(3.0),'photon  γ',C.photon);
-  // an electron on Q shell
-  const qe=[cx+Math.cos(t*0.6)* (SH[6].r*sc), cy+Math.sin(t*0.6)*(SH[6].r*sc)];
-  leader(qe[0],qe[1],gx(0.3),gy(8.7),'electron  e⁻',C.electron);
-  x.fillStyle=C.eorb;x.font='700 10px "Space Mono",monospace';x.textAlign='left';x.fillText('7 shells  K L M N O P Q',gx(0.3),gy(9.4));
-  leader(wx,wy,gx(2.0),gy(0.6),'W boson  W⁻',C.weak);
-  leader(nux,nuy,gx(3.5),gy(0.6),'neutrino  νₑ →',C.weak);
- }
- // corner caption
- x.fillStyle=C.dim;x.font='700 10px "Space Mono",monospace';x.textAlign='right';x.textBaseline='top';
- x.fillText(orbitals?'orbitals: clouds, not tracks':'rings = Bohr shells (a simplification)',S-8,8);
+ if(labels){const pdot=nd.find(d=>d[2]),ndot=nd.find(d=>!d[2]);
+  leader(pdot[0],pdot[1],gx(0.3),gy(3.2),'proton  p⁺',C.nucleus);leader(ndot[0],ndot[1],gx(0.3),gy(2.4),'neutron  n⁰',C.neutron);
+  x.fillStyle=C.nucleus;x.font='700 11px "Space Mono",monospace';x.textAlign='left';x.textBaseline='middle';setGlow(C.ink,4);x.fillText('NUCLEUS · 118 p⁺ + 176 n⁰ (Og)',gx(0.3),gy(1.5));setGlow('',0);
+  leader(pxc,pyc,gx(9.3),gy(3.0),Q?'photon γ (ℏω = ΔE)':'photon  γ',C.photon);
+  const qe=[cx+Math.cos(t*0.6)*(SH[6].r*sc),cy+Math.sin(t*0.6)*(SH[6].r*sc)];
+  leader(qe[0],qe[1],gx(0.3),gy(8.7),Q?'electron ψ (a cloud)':'electron  e⁻',C.electron);
+  x.fillStyle=Q?C.quantum:C.eorb;x.font='700 10px "Space Mono",monospace';x.textAlign='left';
+  x.fillText(Q?'∿ n wavelengths = shell n':'7 shells K L M N O P Q',gx(0.3),gy(9.4));
+  leader(wx,wy,gx(2.0),gy(0.6),'W boson  W⁻',C.weak);leader(nux,nuy,gx(3.5),gy(0.6),'neutrino  νₑ →',C.weak);}
+ // mode caption + uncertainty (quantum)
+ x.font='700 10px "Space Mono",monospace';x.textAlign='right';x.textBaseline='top';x.fillStyle=C.dim;
+ x.fillText(mode==='atomic'?'ATOMIC · Bohr 1913 · rings':mode==='quantum'?'QUANTUM · Schrödinger 1926 · clouds + ∿':'BOTH · the isomorphism overlaid',S-8,8);
+ if(Q){x.textAlign='right';x.fillStyle='rgba(192,139,255,0.85)';x.fillText('Δx·Δp ≥ ℏ/2 — no definite orbit',S-8,24);}
 }
 function loop(){if(playing){t+=0.016;photon.r+=0.05;if(photon.r>4.5)photon.r=1.0;}draw();requestAnimationFrame(loop);}
 document.getElementById('legend').innerHTML=LEG.map(l=>`<div class="lg"><span class="sw" style="background:${l[1]}"></span><span><b>${l[0]}</b><br>${l[2]}</span></div>`).join('');
+document.getElementById('iso').innerHTML='<div class="hd"><div class="a">⊙ ATOMIC (Bohr)</div><div class="m">↔</div><div class="q">∿ QUANTUM (Schrödinger)</div></div>'+ISO.map(r=>`<div class="row"><div class="a">${r[0]}</div><div class="m">${r[1]}</div><div class="q">${r[2]}</div></div>`).join('');
 document.getElementById('facts').innerHTML=FACTS.map(f=>`<div class="fact"><b>${f[0]}</b><span>${f[1]}</span></div>`).join('');
-const bL=document.getElementById('bLabels'),bP=document.getElementById('bPlay'),bG=document.getElementById('bGlow'),bO=document.getElementById('bOrb');
+const seg=document.getElementById('seg');
+seg.querySelectorAll('button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;seg.querySelectorAll('button').forEach(o=>o.classList.toggle('on',o===b));});
+const bL=document.getElementById('bLabels'),bP=document.getElementById('bPlay'),bG=document.getElementById('bGlow');
 bL.onclick=()=>{labels=!labels;bL.textContent='▦ labels: '+(labels?'on':'off');bL.classList.toggle('off',!labels);};
 bP.onclick=()=>{playing=!playing;bP.textContent=(playing?'⏸ pause':'▶ play');bP.classList.toggle('off',!playing);};
 bG.onclick=()=>{glow=!glow;bG.textContent='✦ glow: '+(glow?'on':'off');bG.classList.toggle('off',!glow);};
-bO.onclick=()=>{orbitals=!orbitals;bO.classList.toggle('off',orbitals);};
 loop();
-console.log('%c⚛ THE ATOM · centered · 7 real shells (oganesson Z=118). every -on labeled. — AVAN','color:#4cc9f0');
+console.log('%c⚛⇄∿ ATOMIC ⇄ QUANTUM — shell n = n de Broglie wavelengths. the rings are a low-res shadow of the wavefunction. — AVAN','color:#c08bff');
 </script>
 </body></html>
