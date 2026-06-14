@@ -1,0 +1,128 @@
+[
+  {
+    "slug": "proton",
+    "name": "The Proton",
+    "epithet": "A nucleon built of three quarks (up-up-down), one of the two residents of the nu",
+    "emergence": "spiritual",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The Proton:ATM:ecc6da⟧"
+  },
+  {
+    "slug": "neutron",
+    "name": "The Neutron",
+    "epithet": "The nucleus's other resident — three quarks (up-down-down), no net charge. Stabl",
+    "emergence": "spiritual",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The Neutron:ATM:f921f4⟧"
+  },
+  {
+    "slug": "up-quark",
+    "name": "The Up Quark",
+    "epithet": "A fundamental particle — no known internal structure. Carries fractional charge ",
+    "emergence": "electrical",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The Up Quark:ATM:d87c43⟧"
+  },
+  {
+    "slug": "down-quark",
+    "name": "The Down Quark",
+    "epithet": "The up quark's partner — fundamental, fractionally charged. Protons hold one; ne",
+    "emergence": "electrical",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The Down Quark:ATM:de4a87⟧"
+  },
+  {
+    "slug": "gluon",
+    "name": "The Gluon",
+    "epithet": "The messenger of the STRONG force — massless, but unlike the photon it carries t",
+    "emergence": "electrical",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The Gluon:ATM:ca59da⟧"
+  },
+  {
+    "slug": "nuclear-binding-energy",
+    "name": "Binding Energy & Mass Defect",
+    "epithet": "A bound nucleus weighs LESS than its separate parts — the missing mass became bi",
+    "emergence": "spiritual",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦Binding Energy & Mass Defect:ATM:fdb774⟧"
+  },
+  {
+    "slug": "the-nucleus",
+    "name": "The Nucleus",
+    "epithet": "The dense core: protons and neutrons packed by the strong force into a ball ~100",
+    "emergence": "spiritual",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The Nucleus:ATM:35dad1⟧"
+  },
+  {
+    "slug": "electron",
+    "name": "The Electron",
+    "epithet": "A fundamental lepton — no known size or structure, a true point particle that be",
+    "emergence": "electrical",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The Electron:ATM:3f49f5⟧"
+  },
+  {
+    "slug": "the-electron-cloud",
+    "name": "The Electron Cloud (Orbitals)",
+    "epithet": "The real 'shape' of the electrons: orbitals — 3D probability clouds (s spheres, ",
+    "emergence": "electrical",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The Electron Cloud (Orbitals):ATM:4c22df⟧"
+  },
+  {
+    "slug": "photon",
+    "name": "The Photon",
+    "epithet": "The messenger of the ELECTROMAGNETIC force — a quantum of light. Massless, infin",
+    "emergence": "ethereal",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The Photon:ATM:8999b9⟧"
+  },
+  {
+    "slug": "w-z-bosons",
+    "name": "The W & Z Bosons",
+    "epithet": "The messengers of the WEAK force — unusually massive, which makes the weak force",
+    "emergence": "ethereal",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The W & Z Bosons:ATM:f1b6c3⟧"
+  },
+  {
+    "slug": "electron-neutrino",
+    "name": "The Electron Neutrino",
+    "epithet": "A nearly massless, chargeless lepton that interacts only via the weak force — so",
+    "emergence": "ethereal",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The Electron Neutrino:ATM:337e0b⟧"
+  },
+  {
+    "slug": "electron-shells",
+    "name": "The Electron Shells",
+    "epithet": "The electrons' quantized energy levels — shells K, L, M, N (n = 1, 2, 3, 4…), ea",
+    "emergence": "natural",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The Electron Shells:ATM:28e9bb⟧"
+  },
+  {
+    "slug": "nuclear-shell-model",
+    "name": "The Nuclear Shell Model",
+    "epithet": "The NUCLEUS has its OWN shells: protons and neutrons each fill quantized levels ",
+    "emergence": "natural",
+    "kind": "synth",
+    "actor": "",
+    "moniker": "⟦The Nuclear Shell Model:ATM:7c5ba5⟧"
+  }
+]

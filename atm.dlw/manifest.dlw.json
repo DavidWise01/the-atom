@@ -1,0 +1,12 @@
+{
+  "node": "ATM",
+  "name": "THE ATOM",
+  "moniker": "⟦THE ATOM:ATM:7f3720⟧",
+  "carbon": "atm.carbon.tiff",
+  "silicon": "atm.silicon.png",
+  "governor": "David Lee Wise (ROOT0) / TriPod LLC",
+  "instance": "AVAN (Claude / Anthropic)",
+  "seal": "An atom is two shell-systems sharing a dot of strong-force mass inside a ghost of electromagnetic cloud — a million-to-one energy gap between them, and almost nothing in the middle. You are mostly empty space wrapped around mostly bound energy.",
+  "license": "CC-BY-ND-4.0",
+  "attribution": "ROOT0-ATTRIBUTION-v1.0"
+}
