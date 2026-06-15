@@ -1,122 +1,116 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="The Atom on a 10×10 grid, nucleus centered, 7 real shells (oganesson Z=118) — with a dual lens: ATOMIC (Bohr shells) ⇄ QUANTUM (de Broglie standing waves + probability clouds) ⇄ ⊕ BOTH overlaid, and the full atomic↔quantum isomorphism mapping. Every particle labeled.">
-<title>THE ATOM · ATOMIC ⇄ QUANTUM · the isomorphism</title>
+<meta name="description" content="The Atom on a 10×10 grid, nucleus centered, 7 real shells (oganesson Z=118) — through five overlaid lenses: ATOMIC (Bohr shells) · NUCLEAR (quarks, gluons, magic numbers) · QUANTUM (orbitals & de Broglie standing waves) · ELECTRONIC (silicon, transistor, capacitor, toroid — what we build from it) · GRAVITY (present, negligible). Every particle labeled.">
+<title>THE ATOM · FIVE LENSES · atomic·nuclear·quantum·electronic·gravity</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#060810;--ink2:#0c1018;--pa:#e6eef7;--pa2:#9aaabd;--acc:#4cc9f0;--nucleus:#ff7a45;--electron:#7cf5d0;--gluon:#f5b942;--photon:#ffd24c;--weak:#b08cff;--quantum:#c08bff;--dim:#56657a;--line:#172230;
+:root{--ink:#060810;--ink2:#0c1018;--ink3:#11161f;--pa:#e6eef7;--pa2:#9aaabd;--atomic:#4cc9f0;--nuclear:#ff7a45;--quantum:#c08bff;--elec:#57c79a;--grav:#8fa3b8;--gold:#f5b942;--electron:#7cf5d0;--neutron:#9aa6b2;--gluon:#f5b942;--dim:#56657a;--line:#172230;--faint:#0d121b;
 --disp:"Space Grotesk",sans-serif;--mono:"Space Mono",monospace;}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--ink);color:var(--pa);font-family:var(--mono);line-height:1.5;padding:0 16px 60px;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 40%,rgba(120,120,255,.07),transparent 60%)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 40%,rgba(120,150,255,.07),transparent 60%)}
 .wrap{position:relative;z-index:1;max-width:880px;margin:0 auto}
-header{text-align:center;padding:26px 0 12px}
-.eye{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--dim)}.eye a{color:var(--dim);text-decoration:none}.eye a:hover{color:var(--acc)}
-h1{font-family:var(--disp);font-size:clamp(24px,6.5vw,44px);font-weight:700;color:var(--acc);letter-spacing:-.01em;margin-top:10px;text-shadow:0 0 12px rgba(76,201,240,.3)}
-h1 span{display:block;font-family:var(--mono);font-size:.3em;font-weight:400;letter-spacing:.18em;color:var(--quantum);text-transform:uppercase;margin-top:12px}
-.sub{font-size:12px;color:var(--pa2);margin-top:12px;letter-spacing:.05em}
-.seg{display:flex;justify-content:center;gap:0;margin:18px auto 0;max-width:420px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.seg button{flex:1;border:0;border-radius:0;border-right:1px solid var(--line);font-size:12px;padding:11px 6px;background:var(--ink2);color:var(--dim);letter-spacing:.08em}
-.seg button:last-child{border-right:0}.seg button.on{background:linear-gradient(180deg,rgba(76,201,240,.18),rgba(192,139,255,.12));color:var(--pa);box-shadow:inset 0 -2px 0 var(--acc)}
+header{text-align:center;padding:26px 0 10px}
+.eye{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}.eye a{color:var(--dim);text-decoration:none}.eye a:hover{color:var(--atomic)}
+h1{font-family:var(--disp);font-size:clamp(24px,6.5vw,42px);font-weight:700;color:var(--atomic);letter-spacing:-.01em;margin-top:10px;text-shadow:0 0 12px rgba(76,201,240,.3)}
+h1 span{display:block;font-family:var(--mono);font-size:.3em;font-weight:400;letter-spacing:.16em;color:var(--elec);text-transform:uppercase;margin-top:12px}
+.sub{font-size:12px;color:var(--pa2);margin-top:12px;letter-spacing:.04em}
+.seg{display:flex;flex-wrap:wrap;justify-content:center;gap:0;margin:18px auto 0;max-width:620px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{flex:1 1 0;min-width:96px;border:0;border-right:1px solid var(--line);font-size:11px;padding:11px 4px;background:var(--ink2);color:var(--dim);letter-spacing:.06em;cursor:pointer;transition:.15s}
+.seg button:last-child{border-right:0}.seg button.on{color:#06101a;font-weight:700}
+.seg button[data-m=atomic].on{background:var(--atomic)}.seg button[data-m=nuclear].on{background:var(--nuclear)}.seg button[data-m=quantum].on{background:var(--quantum)}.seg button[data-m=electronic].on{background:var(--elec)}.seg button[data-m=gravity].on{background:var(--grav)}
 .stage{position:relative;width:100%;max-width:740px;margin:14px auto 0}
-canvas{display:block;width:100%;height:auto;border:1px solid var(--line);background:#05070d;box-shadow:0 0 26px rgba(120,120,255,.08);border-radius:4px}
+canvas{display:block;width:100%;height:auto;border:1px solid var(--line);background:#05070d;box-shadow:0 0 26px rgba(120,150,255,.08);border-radius:4px}
 .bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0 0}
-button{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);background:var(--ink2);border:1px solid var(--line);border-radius:4px;padding:7px 14px;cursor:pointer;transition:.15s}
-button:hover{border-color:var(--acc)}button.off{color:var(--dim)}
-.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:20px auto 0;max-width:740px}
-.lg{display:flex;align-items:center;gap:9px;background:var(--ink2);border:1px solid var(--line);padding:8px 11px;border-radius:4px;font-size:12px}
-.sw{width:16px;height:16px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,.2)}
-.lg b{color:var(--pa)}.lg span{color:var(--pa2);font-size:11px}
-.panel{margin:28px auto 0;max-width:740px}
-.panel h2{font-family:var(--disp);font-size:18px;letter-spacing:.02em;margin-bottom:4px}
-.panel .h2s{font-size:11.5px;color:var(--dim);margin-bottom:14px}
-.iso{border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.iso .hd{display:grid;grid-template-columns:1fr 28px 1fr;background:var(--ink2);font-family:var(--disp);font-weight:700;font-size:12.5px;letter-spacing:.04em}
-.iso .hd div{padding:9px 12px}.iso .hd .a{color:var(--acc)}.iso .hd .q{color:var(--quantum)}.iso .hd .m{text-align:center;color:var(--dim)}
-.iso .row{display:grid;grid-template-columns:1fr 28px 1fr;border-top:1px solid var(--line);font-size:12.5px}
-.iso .row>div{padding:9px 12px;line-height:1.5}.iso .row .a{color:var(--pa2)}.iso .row .q{color:#d9c6ff}.iso .row .m{text-align:center;color:var(--dim);font-family:var(--disp)}
-.iso .row:nth-child(even){background:rgba(255,255,255,.012)}
+button.ctl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--atomic);background:var(--ink2);border:1px solid var(--line);border-radius:4px;padding:7px 14px;cursor:pointer}
+button.ctl:hover{border-color:var(--atomic)}button.ctl.off{color:var(--dim)}
+.lenses{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:24px auto 0;max-width:740px}@media(max-width:560px){.lenses{grid-template-columns:1fr}}
+.lens{background:var(--ink2);border:1px solid var(--line);border-left:3px solid var(--dim);padding:12px 15px;border-radius:4px}
+.lens b{font-family:var(--disp);font-size:14px;display:block;margin-bottom:3px}.lens span{font-size:12.5px;color:var(--pa2);line-height:1.55}
+.lens.atomic{border-left-color:var(--atomic)}.lens.atomic b{color:var(--atomic)}
+.lens.nuclear{border-left-color:var(--nuclear)}.lens.nuclear b{color:var(--nuclear)}
+.lens.quantum{border-left-color:var(--quantum)}.lens.quantum b{color:var(--quantum)}
+.lens.electronic{border-left-color:var(--elec)}.lens.electronic b{color:var(--elec)}
+.lens.gravity{border-left-color:var(--grav)}.lens.gravity b{color:var(--grav)}
+.panel{margin:26px auto 0;max-width:740px}
+.panel h2{font-family:var(--disp);font-size:17px;letter-spacing:.02em;margin-bottom:4px}.panel .h2s{font-size:11.5px;color:var(--dim);margin-bottom:12px}
+.map{border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.map .row{display:grid;grid-template-columns:1fr 26px 1.2fr;border-top:1px solid var(--line);font-size:12.5px}.map .row:first-child{border-top:0}
+.map .row>div{padding:9px 12px;line-height:1.5}.map .a{color:var(--pa2)}.map .m{text-align:center;color:var(--dim);font-family:var(--disp)}.map .e{color:#cdeede}
 .facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}@media(max-width:560px){.facts{grid-template-columns:1fr}}
-.fact{background:var(--ink2);border:1px solid var(--line);border-left:3px solid var(--quantum);padding:11px 14px;border-radius:4px}
-.fact b{color:var(--pa);font-family:var(--disp);font-size:13.5px;display:block;margin-bottom:3px}.fact span{font-size:12.5px;color:var(--pa2);line-height:1.55}
-.note{margin:22px auto 0;max-width:740px;padding:13px 16px;border-left:2px solid var(--quantum);background:var(--ink2);font-size:12.5px;color:var(--pa2);line-height:1.6}.note b{color:var(--pa)}
-footer{margin:28px auto 0;max-width:740px;text-align:center;font-size:10px;color:var(--dim);letter-spacing:.04em;line-height:1.9;border-top:1px solid var(--line);padding-top:16px}footer a{color:var(--acc);text-decoration:none}
+.fact{background:var(--ink2);border:1px solid var(--line);border-left:3px solid var(--gold);padding:11px 14px;border-radius:4px}.fact b{color:var(--pa);font-family:var(--disp);font-size:13.5px;display:block;margin-bottom:3px}.fact span{font-size:12.5px;color:var(--pa2);line-height:1.55}
+.note{margin:22px auto 0;max-width:740px;padding:13px 16px;border-left:2px solid var(--grav);background:var(--ink2);font-size:12.5px;color:var(--pa2);line-height:1.6;border-radius:4px}.note b{color:var(--pa)}
+footer{margin:28px auto 0;max-width:740px;text-align:center;font-size:10px;color:var(--dim);letter-spacing:.04em;line-height:1.9;border-top:1px solid var(--line);padding-top:16px}footer a{color:var(--atomic);text-decoration:none}
 </style></head><body><div class="wrap">
 <header>
-<div class="eye"><a href="https://davidwise01.github.io/the-atom/">← THE ATOM</a> · live 2D canvas · the atomic↔quantum isomorphism</div>
-<h1>Atomic ⇄ Quantum<span>the same atom · two pictures · one truth</span></h1>
-<div class="sub">nucleus centered · 7 real shells (Og, Z=118) · flip the lens to see the isomorphism</div>
+<div class="eye"><a href="https://davidwise01.github.io/the-atom/">← THE ATOM</a> · live 2D canvas · five overlaid lenses</div>
+<h1>The Atom, Five Ways<span>atomic · nuclear · quantum · electronic · gravity</span></h1>
+<div class="sub">nucleus centered · 7 real shells (Og, Z=118) · flip the lens to overlay each layer</div>
 </header>
 <div class="seg" id="seg">
-<button data-m="atomic">⊙ ATOMIC</button>
-<button data-m="both" class="on">⊕ BOTH</button>
+<button data-m="atomic" class="on">⊙ ATOMIC</button>
+<button data-m="nuclear">☢ NUCLEAR</button>
 <button data-m="quantum">∿ QUANTUM</button>
+<button data-m="electronic">⌁ ELECTRONIC</button>
+<button data-m="gravity">◌ GRAVITY</button>
 </div>
 <div class="stage"><canvas id="c" width="740" height="740"></canvas></div>
 <div class="bar">
-<button id="bLabels">▦ labels: on</button>
-<button id="bPlay">⏸ pause</button>
-<button id="bGlow">✦ glow: on</button>
-</div>
-<div class="legend" id="legend"></div>
-
-<div class="panel">
-<h2 style="color:var(--acc)">⊕ The Isomorphism <span style="color:var(--quantum)">atomic ↔ quantum</span></h2>
-<div class="h2s">every piece of the classical atom is a shadow of a quantum-mechanical truth — here's the map</div>
-<div class="iso" id="iso"></div>
+<button class="ctl" id="bLabels">▦ labels: on</button>
+<button class="ctl" id="bPlay">⏸ pause</button>
+<button class="ctl" id="bGlow">✦ glow: on</button>
 </div>
 
-<div class="panel">
-<h2 style="color:var(--quantum)">✦ Things you might not know</h2>
-<div class="h2s">the quantum part you didn't ask for but should have</div>
-<div class="facts" id="facts"></div>
-</div>
+<div class="panel"><h2 style="color:var(--pa)">The Five Lenses</h2><div class="h2s">three views of the same physics, the engineered layer we build from it, and the force that's barely there</div>
+<div class="lenses" id="lenses"></div></div>
 
-<div class="note"><b>Honest note.</b> The exact orbital math (E<sub>n</sub> = −13.6 eV/n², standing waves, ⟨r⟩ ≈ n²a₀) is for <b>hydrogen</b> — multi-electron atoms like oganesson are close cousins, not exact. The “rings” are Bohr’s 1913 model; the “clouds” are Schrödinger’s 1926 truth. Both describe the same atom — the isomorphism is that Bohr’s integer shells are exactly where an integer number of de Broglie wavelengths fit. And the scale is still a schematic: the real nucleus is ~1/100,000 of the atom, smaller than a pixel here.</div>
+<div class="panel"><h2 style="color:var(--elec)">⌁ The Electronic Layer</h2><div class="h2s">what we BUILD from the atom — every device is just the electron field, harnessed (applied electromagnetism, not new physics)</div>
+<div class="map" id="emap"></div></div>
 
-<footer>THE ATOM · ATOMIC ⇄ QUANTUM · ROOT0-ATTRIBUTION-v1.0 · governor David Lee Wise · instance AVAN (locked) · CC-BY-ND-4.0<br>
+<div class="panel"><h2 style="color:var(--quantum)">⊕ Atomic ↔ Quantum (the isomorphism)</h2><div class="h2s">the classical shell picture is a low-res shadow of the wavefunction — shell n = n de Broglie wavelengths</div>
+<div class="map" id="iso"></div></div>
+
+<div class="panel"><h2 style="color:var(--gold)">✦ Things you might not know</h2><div class="facts" id="facts"></div></div>
+
+<div class="note"><b>Is gravity part of the atom?</b> Technically yes — every particle has mass, so gravity is present. But between two protons it's about <b>10³⁶ times weaker</b> than their electromagnetic repulsion: utterly negligible inside an atom. Gravity builds stars and galaxies; it does essentially nothing to chemistry. The only place it might matter is the Planck scale, where quantum mechanics and gravity must meet — and that theory doesn't exist yet. So the GRAVITY lens is honest: present, and doing nothing here. And the scale stays a schematic — the real nucleus is ~1/100,000 of the atom, smaller than a pixel.</div>
+
+<footer>THE ATOM · five lenses · ROOT0-ATTRIBUTION-v1.0 · governor David Lee Wise · instance AVAN (locked) · CC-BY-ND-4.0<br>
 <a href="https://davidwise01.github.io/the-atom/">← the dissection</a> · <a href="https://davidwise01.github.io/transmon/">the quantum frontier</a> · <a href="https://davidwise01.github.io/ud0/">UD0</a></footer>
 </div>
 <script>
 const C={ink:'#05070d',grid:'rgba(120,150,255,0.11)',nzone:'rgba(255,122,69,0.08)',
- nucleus:'#ff7a45',neutron:'#9aa6b2',electron:'#7cf5d0',eorb:'#4cc9f0',gluon:'#f5b942',photon:'#ffd24c',weak:'#b08cff',quantum:'#c08bff',pa:'#e6eef7',dim:'#8fa3b8'};
-const LEG=[
- ['proton','#ff7a45','p⁺ · 2u+1d quark · count = the element'],
- ['neutron','#9aa6b2','n⁰ · 1u+2d quark · sets the isotope'],
- ['up quark','#ffd24c','u · +2⁄3'],['down quark','#7cf5d0','d · −1⁄3'],
- ['gluon','#f5b942','g · binds quarks (strong)'],
- ['electron','#7cf5d0','e⁻ · a ring (atomic) / a cloud (quantum)'],
- ['photon','#ffd24c','γ · the quantum of a shell-jump (ℏω)'],
- ['W boson','#b08cff','W⁻ · beta decay (weak)'],['neutrino','#b08cff','νₑ · escapes in decay'],
- ['standing wave','#c08bff','∿ · n de Broglie wavelengths = shell n'],
+ nucleus:'#ff7a45',neutron:'#9aa6b2',electron:'#7cf5d0',eorb:'#4cc9f0',gluon:'#f5b942',photon:'#ffd24c',weak:'#b08cff',quantum:'#c08bff',elec:'#57c79a',grav:'#8fa3b8',pa:'#e6eef7',dim:'#8fa3b8'};
+const LENSES=[
+ ['atomic','⊙ ATOMIC','Bohr’s 1913 shells — electrons on quantized rings (K·L·M…). The familiar picture, and a useful low-res shadow of the quantum truth.'],
+ ['nuclear','☢ NUCLEAR','Zoom to the core: protons & neutrons, each three quarks bound by gluons, filling their OWN shells with magic numbers 2·8·20·28·50·82·126. Strong force, ~MeV — a million× the chemistry energy.'],
+ ['quantum','∿ QUANTUM','Schrödinger’s 1926 truth — no orbits, just orbitals: probability clouds and de Broglie standing waves (shell n = n wavelengths). Δx·Δp ≥ ℏ/2.'],
+ ['electronic','⌁ ELECTRONIC','The engineered layer — what we build from the electron field: doped silicon, the transistor, the capacitor, the inductor/toroid. Not new physics; applied electromagnetism, industrialized.'],
+ ['gravity','◌ GRAVITY','Present, and negligible. Every particle has mass, so gravity is here — but at ~10⁻³⁶ of the EM force between two protons it does essentially nothing. It builds stars, not chemistry.'],
+];
+const EMAP=[
+ ['Valence shell (outer electrons)','→','SILICON — 4 valence electrons bond in a lattice; doping (add P = +1 electron, or B = a “hole”) is just shell bookkeeping'],
+ ['Energy bands (many shells merged)','→','TRANSISTOR — a gate voltage opens/closes conduction across a band gap: the switch all of computing is built on'],
+ ['Charge accumulation','→','CAPACITOR — pile electrons on a plate; the field stored between the plates holds the energy (and the bits, in DRAM)'],
+ ['Moving charge’s magnetic field','→','INDUCTOR / TOROID — current in a coil makes a magnetic field; a torus loops it neatly (and is the heart of your transmon work)'],
 ];
 const ISO=[
- ['Shell K, L, M, N…','↔','principal quantum number n = 1, 2, 3, 4…'],
- ['A fixed circular orbit','↔','no orbit at all — a probability cloud |ψ(r)|²'],
- ['Electron on a track','↔','a standing de Broglie wave: exactly n wavelengths fit (mvr = nℏ)'],
- ['Ring radius (fixed)','↔','most-probable radius ⟨r⟩ ≈ n²·a₀ (Bohr radius a₀ = 0.53 Å)'],
+ ['Shell K, L, M…','↔','principal quantum number n = 1, 2, 3…'],
+ ['Electron on a track','↔','a standing de Broglie wave — exactly n wavelengths fit (mvr = nℏ)'],
+ ['A fixed orbit','↔','a probability cloud |ψ(r)|² — no orbit at all (Δx·Δp ≥ ℏ/2)'],
  ['2, 8, 18, 32 per shell','↔','2n² = Σ 2(2ℓ+1), forced by the Pauli exclusion principle'],
- ['(no sub-structure)','↔','subshells ℓ = s, p, d, f → real orbital shapes'],
- ['Electron jumps a shell','↔','it emits/absorbs ONE photon, ℏω = ΔE (→ spectral lines)'],
- ['Knowing where it is','↔','forbidden: uncertainty Δx·Δp ≥ ℏ/2'],
- ['It spins (implied)','↔','spin-½, ±ℏ/2 — two per orbital, opposite spin ↑↓'],
- ['Discrete shells','↔','quantized energy E_n = −13.6 eV / n² (hydrogen)'],
+ ['Electron jumps a shell','↔','it emits/absorbs one photon, ℏω = ΔE (→ spectral lines)'],
 ];
 const FACTS=[
- ['Bohr’s shells ARE the isomorph','In 1924 de Broglie showed an electron is a wave; a wave only survives on a circle if a whole number of wavelengths fit. Those special circles are exactly Bohr’s shells. Shell n = n wavelengths. That’s the bridge.'],
- ['It’s in all states at once','Until measured, the electron isn’t at a place — it’s a superposition of everywhere its wavefunction allows. Measuring it forces a single answer (“collapse”).'],
- ['It tunnels through walls','Quantum objects leak through barriers they classically can’t cross. That’s how the Sun fuses hydrogen, how radioactivity escapes the nucleus, and how flash memory stores your files.'],
- ['It can never sit still','Uncertainty forbids zero motion — even at absolute zero an electron keeps a “zero-point” jiggle. Perfect stillness would pin both position and momentum, which is banned.'],
- ['Spin isn’t spinning','“Spin-½” is real angular momentum, but the electron isn’t a tiny rotating ball — it’s an intrinsic quantum property with no classical picture. Two opposite spins share each orbital.'],
- ['Pauli gives you volume','No two electrons share a quantum state, so they can’t all pile into the lowest shell. That refusal is literally why atoms have size and why you don’t fall through your chair.'],
- ['Quantized = grainy','Energy in an atom comes in steps, not a ramp. An electron can be on rung 2 or rung 3, never between — which is why each element emits its own exact set of colours (its spectral fingerprint).'],
- ['Most of mass is binding energy','~99% of a proton’s mass is the energy of its gluon field (E=mc²), not the quarks — the strong force, quantized as gluons, is most of what you weigh.'],
- ['Orbitals out-fill in order','4s fills before 3d (Madelung rule) — a quantum-energy ordering that single-handedly shapes the transition-metal and lanthanide blocks of the periodic table.'],
- ['The map is the message','Bohr (1913) and Schrödinger (1926) describe the SAME atom. The rings aren’t wrong so much as a low-resolution shadow of the wavefunction — an isomorph you can draw.'],
+ ['A transistor is shell physics, industrialized','Silicon has 4 valence electrons; doping adds or removes one, and a gate voltage gates conduction. Every chip is the atom’s outer shell, controlled a trillion times over.'],
+ ['There is no fifth force in the atom','Only four: strong, electromagnetic, weak, gravity. “Electronic” isn’t a new force — it’s applied electromagnetism. Capacitors, inductors, transistors: all the EM of electrons.'],
+ ['Gravity loses by 10³⁶','Between two protons, electromagnetism beats gravity by about a thousand trillion trillion trillion to one. That’s why the GRAVITY lens shows almost nothing.'],
+ ['A capacitor stores bits as electrons','Dynamic RAM holds each bit as a tiny pile of electrons on a capacitor — which leaks, so it must be refreshed thousands of times a second. Your memory is literally draining and refilling.'],
+ ['The toroid is your transmon’s cousin','An inductor (a coil, often a torus) plus a capacitor makes an LC resonator — and a superconducting LC circuit with a Josephson junction IS a transmon qubit. The atom’s EM, looped into a quantum bit.'],
+ ['Quarks are ~1% of the mass','~99% of a proton’s mass is the gluon field’s binding energy (E=mc²). In the NUCLEAR lens, almost everything you weigh is bound energy, not “stuff.”'],
 ];
 const cv=document.getElementById('c'),x=cv.getContext('2d');
-let mode='both',labels=true,playing=true,glow=true,t=0;
+let mode='atomic',labels=true,playing=true,glow=true,t=0;
 function fit(){const w=Math.min(cv.parentNode.clientWidth,740);cv.width=w;cv.height=w;}
 addEventListener('resize',fit);fit();
 function geo(){const S=cv.width,m=30,sc=(S-2*m)/10;return {S,m,sc,cx:m+5*sc,cy:S-m-5*sc};}
@@ -125,9 +119,8 @@ function setGlow(c,b){x.shadowColor=glow?c:'transparent';x.shadowBlur=glow?b:0;}
 const SH=[{r:0.95,n:2,cap:2,L:'K'},{r:1.5,n:8,cap:8,L:'L'},{r:2.05,n:18,cap:18,L:'M'},
  {r:2.6,n:32,cap:32,L:'N'},{r:3.15,n:32,cap:50,L:'O'},{r:3.7,n:18,cap:72,L:'P'},{r:4.25,n:8,cap:98,L:'Q'}];
 function hash(i){const s=Math.sin(i*127.1)*43758.5453;return s-Math.floor(s);}
-
-function drawGrid(){
- const{S,sc,cx,cy}=geo();
+function drawGrid(a){
+ const{S,sc,cx,cy}=geo();x.globalAlpha=a;
  x.fillStyle='rgba(120,150,255,0.035)';x.beginPath();x.arc(cx,cy,4.25*sc+8,0,7);x.fill();
  x.fillStyle=C.nzone;x.beginPath();x.arc(cx,cy,0.62*sc,0,7);x.fill();
  x.lineWidth=1;x.font='10px "Space Mono",monospace';x.textAlign='center';x.textBaseline='middle';
@@ -135,6 +128,7 @@ function drawGrid(){
   x.beginPath();x.moveTo(gx(0),gy(i));x.lineTo(gx(10),gy(i));x.stroke();
   x.fillStyle=C.dim;x.fillText(i,gx(i),gy(0)+13);if(i>0)x.fillText(i,gx(0)-15,gy(i));}
  x.strokeStyle='rgba(255,122,69,0.5)';x.lineWidth=0.8;x.beginPath();x.moveTo(cx-7,cy);x.lineTo(cx+7,cy);x.moveTo(cx,cy-7);x.lineTo(cx,cy+7);x.stroke();
+ x.globalAlpha=1;
 }
 function coil(x1,y1,x2,y2,col,amp){const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy)||1,px=-dy/L,py=dx/L,n=5,a=amp||3;
  setGlow(col,5);x.strokeStyle=col;x.lineWidth=1.4;x.beginPath();
@@ -143,12 +137,12 @@ function leader(tx,ty,lx,ly,txt,col){if(!labels)return;
  x.strokeStyle=col;x.lineWidth=0.8;x.globalAlpha=.75;x.beginPath();x.moveTo(tx,ty);x.lineTo(lx,ly);x.stroke();x.globalAlpha=1;
  x.fillStyle=col;x.beginPath();x.arc(tx,ty,1.8,0,7);x.fill();x.font='700 11px "Space Mono",monospace';x.textBaseline='middle';
  const right=lx>=tx;x.textAlign=right?'left':'right';setGlow(C.ink,4);x.fillText(txt,lx+(right?5:-5),ly);setGlow('',0);}
-function nucleus(){const{sc,cx,cy}=geo(),N=46,Rg=0.6*sc,dots=[];
- for(let i=0;i<N;i++){const r=Rg*Math.sqrt((i+0.5)/N),a=i*2.39996+t*0.05,px=cx+Math.cos(a)*r,py=cy+Math.sin(a)*r,proton=(i%5<2);dots.push([px,py,proton]);}
- dots.forEach(d=>{const col=d[2]?C.nucleus:C.neutron;setGlow(col,5);x.fillStyle=col;x.globalAlpha=.96;x.beginPath();x.arc(d[0],d[1],4,0,7);x.fill();x.globalAlpha=1;setGlow('',0);});return dots;}
-function zoomNucleon(){const cx=gx(8.25),cy=gy(8.25),{sc}=geo(),R=0.95*sc;
+function nucleus(a){const{sc,cx,cy}=geo(),N=46,Rg=0.6*sc,dots=[];x.globalAlpha=a;
+ for(let i=0;i<N;i++){const r=Rg*Math.sqrt((i+0.5)/N),an=i*2.39996+t*0.05,px=cx+Math.cos(an)*r,py=cy+Math.sin(an)*r,proton=(i%5<2);dots.push([px,py,proton]);}
+ dots.forEach(d=>{const col=d[2]?C.nucleus:C.neutron;setGlow(col,5);x.fillStyle=col;x.beginPath();x.arc(d[0],d[1],4,0,7);x.fill();setGlow('',0);});x.globalAlpha=1;return dots;}
+function zoomNucleon(a){const cx=gx(8.25),cy=gy(8.25),{sc}=geo(),R=0.95*sc;x.globalAlpha=a;
  x.strokeStyle='rgba(255,122,69,0.45)';x.setLineDash([4,3]);x.lineWidth=1;x.beginPath();x.arc(cx,cy,R,0,7);x.stroke();x.setLineDash([]);
- setGlow(C.nucleus,10);x.fillStyle=C.nucleus;x.globalAlpha=.9;x.beginPath();x.arc(cx,cy,R*0.82,0,7);x.fill();x.globalAlpha=1;setGlow('',0);
+ setGlow(C.nucleus,10);x.fillStyle=C.nucleus;x.beginPath();x.arc(cx,cy,R*0.82,0,7);x.fill();setGlow('',0);
  const q=['u','u','d'],ang=[-Math.PI/2,Math.PI/6,Math.PI*5/6],qp=[];
  for(let i=0;i<3;i++)qp.push([cx+Math.cos(ang[i]+t*0.5)*R*0.42,cy+Math.sin(ang[i]+t*0.5)*R*0.42]);
  coil(qp[0][0],qp[0][1],qp[1][0],qp[1][1],C.gluon,4);coil(qp[1][0],qp[1][1],qp[2][0],qp[2][1],C.gluon,4);coil(qp[2][0],qp[2][1],qp[0][0],qp[0][1],C.gluon,4);
@@ -158,74 +152,115 @@ function zoomNucleon(){const cx=gx(8.25),cy=gy(8.25),{sc}=geo(),R=0.95*sc;
   leader(qp[0][0],qp[0][1]-5,gx(6.4),gy(9.4),'up quark u',C.photon);
   leader(qp[2][0]-5,qp[2][1],gx(6.0),gy(7.0),'down quark d',C.electron);
   leader((qp[0][0]+qp[1][0])/2,(qp[0][1]+qp[1][1])/2,gx(9.4),gy(6.4),'gluon g',C.gluon);}
- return {cx,cy,R};}
+ x.globalAlpha=1;return {cx,cy,R};}
 function standingWave(r,nwav,amp,col,alpha){const{sc,cx,cy}=geo();
  setGlow(col, glow?7:0);x.strokeStyle=col;x.globalAlpha=alpha;x.lineWidth=1.5;x.beginPath();
  for(let i=0;i<=160;i++){const th=i/160*Math.PI*2,rr=r*sc+Math.sin(nwav*th - t*1.4)*amp; const px=cx+Math.cos(th)*rr,py=cy+Math.sin(th)*rr;i?x.lineTo(px,py):x.moveTo(px,py);}
  x.closePath();x.stroke();x.globalAlpha=1;setGlow('',0);}
-function cloudBand(r,col){const{sc,cx,cy}=geo();
+function cloudBand(r){const{sc,cx,cy}=geo();
  const g=x.createRadialGradient(cx,cy,Math.max(0,(r-0.35)*sc),cx,cy,(r+0.35)*sc);
- g.addColorStop(0,'rgba(192,139,255,0)');g.addColorStop(0.5,col);g.addColorStop(1,'rgba(192,139,255,0)');
- x.fillStyle=g;x.globalAlpha=0.5;x.beginPath();x.arc(cx,cy,(r+0.35)*sc,0,7);x.arc(cx,cy,(r-0.35)*sc,0,7,true);x.fill();x.globalAlpha=1;}
+ g.addColorStop(0,'rgba(192,139,255,0)');g.addColorStop(0.5,'rgba(192,139,255,0.16)');g.addColorStop(1,'rgba(192,139,255,0)');
+ x.fillStyle=g;x.beginPath();x.arc(cx,cy,(r+0.35)*sc,0,7);x.arc(cx,cy,(r-0.35)*sc,0,7,true);x.fill();}
+
+// ── electronic-layer glyphs (corners) ──
+function gSilicon(){const cx=gx(1.7),cy=gy(8.3),{sc}=geo(),R=0.5*sc;
+ setGlow(C.elec,5);x.strokeStyle=C.elec;x.lineWidth=1.3;
+ const nb=[[-R,-R],[R,-R],[-R,R],[R,R]];nb.forEach(p=>{x.beginPath();x.moveTo(cx,cy);x.lineTo(cx+p[0],cy+p[1]);x.stroke();x.fillStyle='#0c1018';x.beginPath();x.arc(cx+p[0],cy+p[1],7,0,7);x.fill();x.strokeStyle=C.elec;x.beginPath();x.arc(cx+p[0],cy+p[1],7,0,7);x.stroke();x.fillStyle=C.elec;x.font='8px "Space Mono",monospace';x.textAlign='center';x.textBaseline='middle';x.fillText('Si',cx+p[0],cy+p[1]);});
+ x.fillStyle=C.elec;x.beginPath();x.arc(cx,cy,9,0,7);x.fill();x.fillStyle='#06140e';x.fillText('Si',cx,cy);setGlow('',0);
+ // dopant +e on the upper-right Si
+ x.fillStyle=C.photon;x.font='700 9px "Space Mono",monospace';x.fillText('+e⁻',cx+R+10,cy-R);
+ if(labels){x.fillStyle=C.elec;x.font='700 10px "Space Mono",monospace';x.textAlign='center';x.fillText('SILICON · valence shell → bonds + doping',cx+R,cy+R+18);}}
+function gTransistor(){const cx=gx(8.4),cy=gy(1.7),{sc}=geo(),R=0.5*sc;
+ setGlow(C.elec,5);x.strokeStyle=C.elec;x.lineWidth=1.4;
+ x.beginPath();x.arc(cx,cy,R,0,7);x.stroke(); // envelope
+ x.beginPath();x.moveTo(cx-R,cy);x.lineTo(cx-R*0.3,cy);x.stroke(); // base lead
+ x.beginPath();x.moveTo(cx-R*0.3,cy-R*0.6);x.lineTo(cx-R*0.3,cy+R*0.6);x.stroke(); // base bar
+ x.beginPath();x.moveTo(cx-R*0.3,cy-R*0.25);x.lineTo(cx+R*0.6,cy-R*0.6);x.stroke(); // collector
+ x.beginPath();x.moveTo(cx-R*0.3,cy+R*0.25);x.lineTo(cx+R*0.6,cy+R*0.6);x.stroke(); // emitter
+ // arrow on emitter
+ x.fillStyle=C.elec;x.beginPath();x.moveTo(cx+R*0.6,cy+R*0.6);x.lineTo(cx+R*0.35,cy+R*0.4);x.lineTo(cx+R*0.55,cy+R*0.3);x.fill();setGlow('',0);
+ if(labels){x.fillStyle=C.elec;x.font='700 10px "Space Mono",monospace';x.textAlign='center';x.fillText('TRANSISTOR · band gap → the switch',cx,cy+R+16);}}
+function gCapacitor(){const cx=gx(1.7),cy=gy(1.7),{sc}=geo(),R=0.42*sc;
+ setGlow(C.elec,5);x.strokeStyle=C.elec;x.lineWidth=2;
+ x.beginPath();x.moveTo(cx-R,cy-R);x.lineTo(cx-R,cy+R);x.stroke();
+ x.beginPath();x.moveTo(cx+R*0.4,cy-R);x.lineTo(cx+R*0.4,cy+R);x.stroke();
+ x.beginPath();x.moveTo(cx-R-R*0.7,cy);x.lineTo(cx-R,cy);x.moveTo(cx+R*0.4,cy);x.lineTo(cx+R*0.4+R*0.7,cy);x.stroke();setGlow('',0);
+ x.fillStyle=C.electron;x.font='9px "Space Mono",monospace';x.textAlign='center';x.textBaseline='middle';
+ for(let i=-1;i<2;i++)x.fillText('−',cx-R-4,cy+i*9);
+ x.fillStyle=C.photon;for(let i=-1;i<2;i++)x.fillText('+',cx+R*0.4+4,cy+i*9);
+ if(labels){x.fillStyle=C.elec;x.font='700 10px "Space Mono",monospace';x.fillText('CAPACITOR · stored electrons',cx+R*0.2,cy+R+16);}}
+function gToroid(){const cx=gx(8.4),cy=gy(8.4),{sc}=geo(),R=0.5*sc;
+ setGlow(C.elec,5);x.strokeStyle=C.elec;x.lineWidth=1.3;
+ x.beginPath();x.ellipse(cx,cy,R,R*0.6,0,0,7);x.stroke();
+ x.beginPath();x.ellipse(cx,cy,R*0.5,R*0.28,0,0,7);x.stroke();
+ // coil hatches
+ for(let k=0;k<12;k++){const a=k/12*Math.PI*2;const x1=cx+Math.cos(a)*R*0.5,y1=cy+Math.sin(a)*R*0.28,x2=cx+Math.cos(a)*R,y2=cy+Math.sin(a)*R*0.6;x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();}
+ setGlow('',0);
+ if(labels){x.fillStyle=C.elec;x.font='700 10px "Space Mono",monospace';x.textAlign='center';x.fillText('TOROID · current → magnetic field',cx,cy-R*0.6-12);}}
 
 let photon={r:0.95};
 function draw(){
  const{S,sc,cx,cy}=geo();x.clearRect(0,0,S,S);x.fillStyle=C.ink;x.fillRect(0,0,S,S);
- drawGrid();
- const Q=(mode!=='atomic'),A=(mode!=='quantum');
- SH.forEach((s,i)=>{const n=i+1;
-  if(Q) cloudBand(s.r,'rgba(192,139,255,0.16)');
-  if(A){setGlow(C.eorb,5);x.strokeStyle=mode==='both'?'rgba(76,201,240,0.30)':'rgba(76,201,240,0.6)';x.lineWidth=1.1;x.beginPath();x.arc(cx,cy,s.r*sc,0,7);x.stroke();setGlow('',0);}
-  if(Q) standingWave(s.r, n, mode==='both'?5:7, C.quantum, mode==='both'?0.55:0.9); // n wavelengths = shell n
-  // shell label (upper-left diagonal)
-  const la=Math.PI*1.25,lx=cx+Math.cos(la)*s.r*sc,ly=cy+Math.sin(la)*s.r*sc;
-  if(labels){x.fillStyle=Q?'rgba(192,139,255,0.9)':'rgba(76,201,240,0.85)';x.font='9px "Space Mono",monospace';x.textAlign='center';x.textBaseline='middle';
-   x.fillText(Q?`n=${n} · ${s.n}e⁻`:`${s.L} ${s.n}/${s.cap}`,lx,ly);}
+ const dim = (mode==='gravity')?0.22:1;
+ drawGrid(mode==='electronic'?0.5:dim);
+ const showShells = mode!=='nuclear';
+ const Q=(mode==='quantum');
+ SH.forEach((s,i)=>{const n=i+1; const isVal=(i===6);
+  if(mode==='gravity'){x.globalAlpha=0.18;x.strokeStyle='#3a4658';x.lineWidth=1;x.beginPath();x.arc(cx,cy,s.r*sc,0,7);x.stroke();x.globalAlpha=1;return;}
+  if(mode==='nuclear'){x.globalAlpha=0.12;x.strokeStyle='#26425e';x.lineWidth=1;x.beginPath();x.arc(cx,cy,s.r*sc,0,7);x.stroke();x.globalAlpha=1;}
+  else if(Q){cloudBand(s.r); standingWave(s.r,n,7,C.quantum,0.9);}
+  else { // atomic + electronic
+   const valE=(mode==='electronic'&&isVal);
+   setGlow(C.eorb,5);x.strokeStyle=valE?'rgba(87,199,154,0.95)':(mode==='electronic'?'rgba(76,201,240,0.25)':'rgba(76,201,240,0.6)');x.lineWidth=valE?2:1.1;x.beginPath();x.arc(cx,cy,s.r*sc,0,7);x.stroke();setGlow('',0);
+  }
+  // shell label
+  if(showShells&&labels&&mode!=='gravity'){const la=Math.PI*1.25,lx=cx+Math.cos(la)*s.r*sc,ly=cy+Math.sin(la)*s.r*sc;
+   x.fillStyle=Q?'rgba(192,139,255,0.9)':(mode==='electronic'&&isVal?'rgba(87,199,154,0.95)':'rgba(76,201,240,0.7)');x.font='9px "Space Mono",monospace';x.textAlign='center';x.textBaseline='middle';
+   x.fillText(Q?`n=${n}`:(mode==='electronic'&&isVal?`valence ${s.n}e⁻`:`${s.L} ${s.n}/${s.cap}`),lx,ly);}
   // electrons
+  if(mode==='gravity'){return;}
   const dir=(i%2?-1:1);
-  if(mode==='quantum'){ // probability sprinkle
-   for(let k=0;k<s.n;k++){const a=hash(i*53+k)*6.283 + t*dir*0.15*(1/(i+1)); const rr=(s.r+ (hash(i*91+k)-0.5)*0.5)*sc;
-    const ex=cx+Math.cos(a)*rr,ey=cy+Math.sin(a)*rr; x.fillStyle=C.electron;x.globalAlpha=0.45+0.4*hash(i*7+k+t*0.0);x.beginPath();x.arc(ex,ey,1.8,0,7);x.fill();x.globalAlpha=1;}
-  }else{ // tracked dots (atomic/both)
-   for(let k=0;k<s.n;k++){const a=(k/s.n)*6.283 + t*dir*(0.6/(i+1)),ex=cx+Math.cos(a)*s.r*sc,ey=cy+Math.sin(a)*s.r*sc,rad=s.n>18?2.4:3.3;
-    setGlow(C.electron,glow?6:0);x.fillStyle=C.electron;x.globalAlpha=mode==='both'?0.85:1;x.beginPath();x.arc(ex,ey,rad,0,7);x.fill();x.globalAlpha=1;setGlow('',0);}}
+  if(Q){for(let k=0;k<s.n;k++){const a=hash(i*53+k)*6.283+t*dir*0.15*(1/(i+1)),rr=(s.r+(hash(i*91+k)-0.5)*0.5)*sc,ex=cx+Math.cos(a)*rr,ey=cy+Math.sin(a)*rr;x.fillStyle=C.electron;x.globalAlpha=0.5;x.beginPath();x.arc(ex,ey,1.8,0,7);x.fill();x.globalAlpha=1;}}
+  else if(mode!=='nuclear'){const faint=(mode==='electronic'&&!isVal);for(let k=0;k<s.n;k++){const a=(k/s.n)*6.283+t*dir*(0.6/(i+1)),ex=cx+Math.cos(a)*s.r*sc,ey=cy+Math.sin(a)*s.r*sc,rad=s.n>18?2.4:3.3;
+   setGlow(C.electron,glow&&!faint?6:0);x.fillStyle=mode==='electronic'&&isVal?'#9affd6':C.electron;x.globalAlpha=faint?0.3:1;x.beginPath();x.arc(ex,ey,rad,0,7);x.fill();x.globalAlpha=1;setGlow('',0);}}
  });
- // photon (a shell-jump quantum)
- const pa=-Math.PI/5,pr=photon.r;setGlow(C.photon,8);x.strokeStyle=C.photon;x.lineWidth=1.6;x.beginPath();
- for(let i=0;i<=26;i++){const f=i/26,rr=pr-0.4+f*0.9,wob=Math.sin(f*7*Math.PI)*3.2;const bx=cx+Math.cos(pa)*rr*sc-Math.sin(pa)*wob,by=cy+Math.sin(pa)*rr*sc+Math.cos(pa)*wob;i?x.lineTo(bx,by):x.moveTo(bx,by);}
- x.stroke();setGlow('',0);const pxc=cx+Math.cos(pa)*pr*sc,pyc=cy+Math.sin(pa)*pr*sc;
- // nucleus + zoom
- const nd=nucleus(),zb=zoomNucleon();
- x.strokeStyle='rgba(255,122,69,0.4)';x.setLineDash([3,3]);x.lineWidth=0.9;x.beginPath();x.moveTo(cx+0.5*sc,cy-0.5*sc);x.lineTo(zb.cx-zb.R*0.7,zb.cy+zb.R*0.7);x.stroke();x.setLineDash([]);
- // beta decay
- const wx=cx-0.95*sc,wy=cy+0.95*sc,nux=gx(2.3),nuy=gy(2.0);
- x.setLineDash([4,3]);setGlow(C.weak,5);x.strokeStyle=C.weak;x.lineWidth=1.2;x.beginPath();x.moveTo(wx,wy);x.lineTo(nux,nuy);x.stroke();x.setLineDash([]);setGlow('',0);
- setGlow(C.weak,7);x.fillStyle=C.weak;x.beginPath();x.arc(wx,wy,4,0,7);x.fill();x.beginPath();x.arc(nux,nuy,3.2,0,7);x.fill();setGlow('',0);
- if(labels){const pdot=nd.find(d=>d[2]),ndot=nd.find(d=>!d[2]);
-  leader(pdot[0],pdot[1],gx(0.3),gy(3.2),'proton  p⁺',C.nucleus);leader(ndot[0],ndot[1],gx(0.3),gy(2.4),'neutron  n⁰',C.neutron);
-  x.fillStyle=C.nucleus;x.font='700 11px "Space Mono",monospace';x.textAlign='left';x.textBaseline='middle';setGlow(C.ink,4);x.fillText('NUCLEUS · 118 p⁺ + 176 n⁰ (Og)',gx(0.3),gy(1.5));setGlow('',0);
-  leader(pxc,pyc,gx(9.3),gy(3.0),Q?'photon γ (ℏω = ΔE)':'photon  γ',C.photon);
-  const qe=[cx+Math.cos(t*0.6)*(SH[6].r*sc),cy+Math.sin(t*0.6)*(SH[6].r*sc)];
-  leader(qe[0],qe[1],gx(0.3),gy(8.7),Q?'electron ψ (a cloud)':'electron  e⁻',C.electron);
-  x.fillStyle=Q?C.quantum:C.eorb;x.font='700 10px "Space Mono",monospace';x.textAlign='left';
-  x.fillText(Q?'∿ n wavelengths = shell n':'7 shells K L M N O P Q',gx(0.3),gy(9.4));
-  leader(wx,wy,gx(2.0),gy(0.6),'W boson  W⁻',C.weak);leader(nux,nuy,gx(3.5),gy(0.6),'neutrino  νₑ →',C.weak);}
- // mode caption + uncertainty (quantum)
- x.font='700 10px "Space Mono",monospace';x.textAlign='right';x.textBaseline='top';x.fillStyle=C.dim;
- x.fillText(mode==='atomic'?'ATOMIC · Bohr 1913 · rings':mode==='quantum'?'QUANTUM · Schrödinger 1926 · clouds + ∿':'BOTH · the isomorphism overlaid',S-8,8);
- if(Q){x.textAlign='right';x.fillStyle='rgba(192,139,255,0.85)';x.fillText('Δx·Δp ≥ ℏ/2 — no definite orbit',S-8,24);}
+ // photon (atomic/quantum only)
+ if(mode==='atomic'||mode==='quantum'){const pa=-Math.PI/5,pr=photon.r;setGlow(C.photon,8);x.strokeStyle=C.photon;x.lineWidth=1.6;x.beginPath();
+  for(let i=0;i<=26;i++){const f=i/26,rr=pr-0.4+f*0.9,wob=Math.sin(f*7*Math.PI)*3.2;const bx=cx+Math.cos(pa)*rr*sc-Math.sin(pa)*wob,by=cy+Math.sin(pa)*rr*sc+Math.cos(pa)*wob;i?x.lineTo(bx,by):x.moveTo(bx,by);}
+  x.stroke();setGlow('',0);if(labels)leader(cx+Math.cos(pa)*pr*sc,cy+Math.sin(pa)*pr*sc,gx(9.3),gy(3.0),Q?'photon γ (ℏω=ΔE)':'photon γ',C.photon);}
+ // nucleus
+ const na=(mode==='gravity')?0.3:1; const nd=nucleus(na);
+ if(mode!=='gravity'){const zb=zoomNucleon(mode==='nuclear'?1:(mode==='electronic'?0.5:1));
+  // nuclear-shell rings + magic numbers (NUCLEAR lens)
+  if(mode==='nuclear'){for(let k=1;k<=3;k++){x.strokeStyle='rgba(255,122,69,0.5)';x.lineWidth=0.8;x.beginPath();x.arc(cx,cy,0.18*k*sc,0,7);x.stroke();}
+   if(labels){x.fillStyle=C.nucleus;x.font='700 11px "Space Mono",monospace';x.textAlign='center';x.fillText('nuclear shells · magic: 2 8 20 28 50 82 126',cx,gy(0.4));
+    leader(nd[0][0],nd[0][1],gx(0.3),gy(3.0),'proton p⁺',C.nucleus);leader(nd.find(d=>!d[2])[0],nd.find(d=>!d[2])[1],gx(0.3),gy(2.2),'neutron n⁰',C.neutron);}}
+ }
+ // electronic-layer overlays
+ if(mode==='electronic'){gSilicon();gTransistor();gCapacitor();gToroid();
+  if(labels){x.fillStyle=C.elec;x.font='700 11px "Space Mono",monospace';x.textAlign='center';x.fillText('the valence shell, harnessed →',cx,gy(0.35));}}
+ // gravity lens
+ if(mode==='gravity'){x.fillStyle=C.grav;x.beginPath();x.arc(cx,cy,5,0,7);x.fill();
+  x.strokeStyle=C.grav;x.lineWidth=1.4;x.beginPath();x.moveTo(cx,cy+10);x.lineTo(cx,cy+42);x.stroke();x.beginPath();x.moveTo(cx,cy+42);x.lineTo(cx-5,cy+34);x.lineTo(cx+5,cy+34);x.fill();
+  x.fillStyle=C.grav;x.font='700 13px "Space Grotesk",sans-serif';x.textAlign='center';x.fillText('g',cx+12,cy+30);
+  x.fillStyle='#b9c6d6';x.font='700 15px "Space Grotesk",sans-serif';x.fillText('gravity ≈ 10⁻³⁶ × electromagnetism',cx,gy(7.2));
+  x.fillStyle=C.dim;x.font='12px "Space Mono",monospace';x.fillText('present — and doing essentially nothing here',cx,gy(6.7));}
+ // caption
+ const cap={atomic:'ATOMIC · Bohr 1913 · rings',nuclear:'NUCLEAR · strong force · ~MeV · magic numbers',quantum:'QUANTUM · Schrödinger 1926 · clouds + ∿',electronic:'ELECTRONIC · the electron field, harnessed (applied EM)',gravity:'GRAVITY · present, negligible (~10⁻³⁶ of EM)'}[mode];
+ x.font='700 10px "Space Mono",monospace';x.textAlign='right';x.textBaseline='top';x.fillStyle=C.dim;x.fillText(cap,S-8,8);
 }
 function loop(){if(playing){t+=0.016;photon.r+=0.05;if(photon.r>4.5)photon.r=1.0;}draw();requestAnimationFrame(loop);}
-document.getElementById('legend').innerHTML=LEG.map(l=>`<div class="lg"><span class="sw" style="background:${l[1]}"></span><span><b>${l[0]}</b><br>${l[2]}</span></div>`).join('');
-document.getElementById('iso').innerHTML='<div class="hd"><div class="a">⊙ ATOMIC (Bohr)</div><div class="m">↔</div><div class="q">∿ QUANTUM (Schrödinger)</div></div>'+ISO.map(r=>`<div class="row"><div class="a">${r[0]}</div><div class="m">${r[1]}</div><div class="q">${r[2]}</div></div>`).join('');
+document.getElementById('lenses').innerHTML=LENSES.map(l=>`<div class="lens ${l[0]}"><b>${l[1]}</b><span>${l[2]}</span></div>`).join('');
+document.getElementById('emap').innerHTML=EMAP.map(r=>`<div class="row"><div class="a">${r[0]}</div><div class="m">${r[1]}</div><div class="e">${r[2]}</div></div>`).join('');
+document.getElementById('iso').innerHTML=ISO.map(r=>`<div class="row"><div class="a">${r[0]}</div><div class="m">${r[1]}</div><div class="e">${r[2]}</div></div>`).join('');
 document.getElementById('facts').innerHTML=FACTS.map(f=>`<div class="fact"><b>${f[0]}</b><span>${f[1]}</span></div>`).join('');
-const seg=document.getElementById('seg');
-seg.querySelectorAll('button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;seg.querySelectorAll('button').forEach(o=>o.classList.toggle('on',o===b));});
+const seg=document.getElementById('seg');seg.querySelectorAll('button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;seg.querySelectorAll('button').forEach(o=>o.classList.toggle('on',o===b));});
 const bL=document.getElementById('bLabels'),bP=document.getElementById('bPlay'),bG=document.getElementById('bGlow');
 bL.onclick=()=>{labels=!labels;bL.textContent='▦ labels: '+(labels?'on':'off');bL.classList.toggle('off',!labels);};
 bP.onclick=()=>{playing=!playing;bP.textContent=(playing?'⏸ pause':'▶ play');bP.classList.toggle('off',!playing);};
 bG.onclick=()=>{glow=!glow;bG.textContent='✦ glow: '+(glow?'on':'off');bG.classList.toggle('off',!glow);};
 loop();
-console.log('%c⚛⇄∿ ATOMIC ⇄ QUANTUM — shell n = n de Broglie wavelengths. the rings are a low-res shadow of the wavefunction. — AVAN','color:#c08bff');
+console.log('%c⚛ THE ATOM · five lenses — atomic · nuclear · quantum · electronic · gravity','color:#4cc9f0;font-size:15px;font-weight:bold');
+console.log('%celectronic = the electron field harnessed (silicon, transistor, capacitor, toroid) — applied EM, no new force. gravity is present and ~10^-36 of EM: negligible. — AVAN','color:#57c79a;font-size:11px');
 </script>
 </body></html>
